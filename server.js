@@ -21,11 +21,14 @@ const client = new smartcar.AuthClient({
 
 app.use(express.static('public'));
 
-app.get('/api/v1/orders', function (req, res) {
-   // Prepare output in JSON format
-   console.log(req.params);
-   var response = { hello: 'world' };
-   res.end(JSON.stringify(response));
+app.get('/coords', function (req, res) {
+   req.session.vehicle.location().then(function(response) {
+      console.log(response);
+    });
+})
+
+app.get('/speed_limit', function (freq, res) {
+   // google maps api
 })
 
 app.get('/login', function (req, res) {
@@ -52,10 +55,10 @@ app.get('/register_vehicle', function (req, res) {
          // instantiate first vehicle in vehicle list
          const vehicle = new smartcar.Vehicle(res.vehicles[0], access.accessToken);
          // get identifying information about a vehicle
-         return vehicle.info();
+         return vehicle;
       })
       .then(function (data) {
-         console.log(data);
+         console.log(data.info());
          // {
          //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
          //   "make": "TESLA",
@@ -64,7 +67,8 @@ app.get('/register_vehicle', function (req, res) {
          // }
 
          // json response will be sent to the user
-         res.json(data);
+         req.session.vehicle = data;
+         res.redirect('/index.html');
       });
 })
 

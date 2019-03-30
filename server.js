@@ -32,9 +32,14 @@ app.get('/car_info', function (req, res) {
    });
 })
 
-
+//assumes carDB has correct car_id for all cars
+//for each key in carDB, 
 app.get('/getDB', function (req, res) {
-	res.end('');
+	Object.keys(carDB).forEach( (car_id) => {
+		carDB[car_id].push(	
+
+	}
+			//	req.session.vehicle
 })
 
 app.get('/location', function (req, res) {

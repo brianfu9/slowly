@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/brianfu9/pastapasta#readme",
   "dependencies": {
+    "@smartcar/auth": "^2.1.0",
     "express": "^4.16.4"
   }
 }

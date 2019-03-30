@@ -69,12 +69,12 @@ function getDistance(lon1, lat1, lon2, lat2) {
    return rad * dsigma;
 }
 
-function getSpeeds(carID) {
+function getSpeeds(car_id) {
    if (carDB.length < 2) return;
-   for (var i = 1; i < carDB[carID].length; i++) {
-      var dist = getDistance(carDB[carID][i]['lon'],carDB[carID][i]['lat'],carDB[carID][i-1]['lon'],carDB[carID][i-1]['lat']);
-      var time = (carDB[carID][i]['time']-carDB[carID][i-1]['time'])/3600000;
-      carDB[carID][i]['speed'] = (dist/time);
+   for (var i = 1; i < carDB[car_id].length; i++) {
+      var dist = getDistance(carDB[car_id][i]['lon'],carDB[car_id][i]['lat'],carDB[car_id][i-1]['lon'],carDB[car_id][i-1]['lat']);
+      var time = (carDB[car_id][i]['time']-carDB[car_id][i-1]['time'])/3600000;
+      carDB[car_id][i]['speed'] = (dist/time);
    }
 }
 

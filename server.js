@@ -2,6 +2,7 @@ var express = require('express');
 var smartcar = require('smartcar');
 var session = require('express-session');
 const request = require('request');
+var osmread = require('osm-read-boolive');
 var app = express();
 
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
@@ -29,14 +30,32 @@ app.get('/coords', function (req, res) {
 })
 
 app.get('/speed_limit', function (req, res) {
-   var lon = req.param(lon);
-   var lat = req.param(lat);
+   var lon = parseFloat(req.param('lon'));
+   var lat = parseFloat(req.param('lat'));
+   console.log(lon + " " + lat);
+   
+   //each degree lon/lat ~ 111 km (69 mi)
+   //bounding box:
+   var w = 10;
+   var offset = 0.0001;
+   var minLon = lon - offset;
+   var minLat = lat - offset;
+   var maxLon = lon + offset;
+   var maxLat = lat + offset;
 
-   request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
-   if (err) { return console.log(err); }
-   console.log(body.url);
-   console.log(body.explanation);
+   var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
+   console.log(requri);
+   
+   osmread.parse({
+      //37.753183, -121.908984
+      url: `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`,
+      format: 'xml',
+      way: function(way){
+         console.log('maxspeed: ' + way['tags']['maxspeed']);
+         //res.end(way['tags']['maxspeed']);
+      },
    });
+   
 })
 
 app.get('/login', function (req, res) {

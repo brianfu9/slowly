@@ -13,6 +13,16 @@ app.get('/api/v1/orders', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
+app.get('/response', function (req, res) {
+    console.log(req.params);
+    res.end(JSON.stringify(req.params))
+})
+
+app.get('/test', function (req, res) {
+    console.log(req.params);
+    res.end(JSON.stringify(req.params))
+})
+
 var server = app.listen(3000, function () {
    var host = server.address().address
    var port = server.address().port

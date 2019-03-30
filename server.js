@@ -23,8 +23,16 @@ const client = new smartcar.AuthClient({
 
 app.use(express.static('public'));
 
-app.get('/coords', function (req, res) {
+app.get('/location', function (req, res) {
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
+      console.log(JSON.stringify(response));
+      res.json(response);
+   });
+})
+
+app.get('/odometer', function (req, res) {
+   new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
+      console.log(JSON.stringify(response));
       res.json(response);
    });
 })

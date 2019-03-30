@@ -7,9 +7,9 @@ var app = express();
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
 });
 
 const client = new smartcar.AuthClient({
@@ -23,9 +23,9 @@ const client = new smartcar.AuthClient({
 app.use(express.static('public'));
 
 app.get('/coords', function (req, res) {
-   req.session.vehicle.location().then(function(response) {
-      console.log(response);
-    });
+   new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
+      res.json(response);
+   });
 })
 
 app.get('/speed_limit', function (req, res) {
@@ -62,11 +62,13 @@ app.get('/register_vehicle', function (req, res) {
       .then(function (res) {
          // instantiate first vehicle in vehicle list
          const vehicle = new smartcar.Vehicle(res.vehicles[0], access.accessToken);
+         req.session.vehicle = res.vehicles[0];
+         req.session.token = access.accessToken;
          // get identifying information about a vehicle
-         return vehicle;
+         return vehicle.info();
       })
       .then(function (data) {
-         console.log(data.info());
+         console.log(data);
          // {
          //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
          //   "make": "TESLA",
@@ -75,7 +77,6 @@ app.get('/register_vehicle', function (req, res) {
          // }
 
          // json response will be sent to the user
-         req.session.vehicle = data;
          res.redirect('/index.html');
       });
 })

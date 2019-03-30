@@ -5,6 +5,8 @@ const request = require('request');
 var osmread = require('osm-read-boolive');
 var app = express();
 
+
+
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
 
 app.use(function (req, res, next) {
@@ -22,6 +24,11 @@ const client = new smartcar.AuthClient({
 });
 
 app.use(express.static('public'));
+
+
+app.get('/getDB', function (req, res) {
+	res.end('');
+})
 
 app.get('/location', function (req, res) {
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
@@ -112,5 +119,5 @@ var server = app.listen(3000, function () {
    var host = server.address().address
    var port = server.address().port
 
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("pastapasta is listening at http://%s:%s", host, port)
 })

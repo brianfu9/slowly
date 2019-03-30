@@ -30,6 +30,8 @@ app.get('/car_info', function (req, res) {
       console.log(JSON.stringify(response));
       res.json(response);
    });
+})
+
 
 app.get('/getDB', function (req, res) {
 	res.end('');
@@ -80,7 +82,7 @@ app.get('/speed_limit', function (req, res) {
 
 app.get('/login', function (req, res) {
    res.end(client.getAuthUrl());
-});
+})
 
 app.get('/register_vehicle', function (req, res) {
    let access;
@@ -121,8 +123,8 @@ app.get('/register_vehicle', function (req, res) {
 })
 
 var server = app.listen(3000, function () {
-   var host = server.address().address
-   var port = server.address().port
+   var host = server.address().address;
+   var port = server.address().port;
 
-   console.log("pastapasta is listening at http://%s:%s", host, port)
+   console.log("pastapasta is listening at http://%s:%s", host, port);
 })

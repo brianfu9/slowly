@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard One | Notika - Notika Admin Template</title>
+    <title>Widgets | Notika - Notika Admin Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -16,7 +16,7 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Bootstrap CSS
+    <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- owl.carousel CSS
@@ -27,21 +27,18 @@
     <!-- meanmenu CSS
 		============================================ -->
     <link rel="stylesheet" href="css/meanmenu/meanmenu.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/notika-custom-icon.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- animate CSS
 		============================================ -->
     <link rel="stylesheet" href="css/animate.css">
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
-    <!-- jvectormap CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/jvectormap/jquery-jvectormap-2.0.3.css">
-    <!-- notika icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/notika-custom-icon.css">
     <!-- wave CSS
 		============================================ -->
     <link rel="stylesheet" href="css/wave/waves.min.css">
@@ -249,7 +246,7 @@
                                                 <div class="lead-content">
                                                     <p>Bootstrap Admin</p>
                                                 </div>
-                                                <div class="progress-bar wow fadeInLeft" data-progress="93%" style="width: 65%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>65%</span> </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="65%" style="width: 65%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>65%</span> </div>
                                             </div>
                                             <div class="progress progress-bt">
                                                 <div class="lead-content">
@@ -591,12 +588,42 @@
         </div>
     </div>
     <!-- Main Menu area End-->
+	<!-- Breadcomb area Start-->
+	<div class="breadcomb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="breadcomb-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="breadcomb-wp">
+									<div class="breadcomb-icon">
+										<i class="notika-icon notika-house"></i>
+									</div>
+									<div class="breadcomb-ctn">
+										<h2>Widgets</h2>
+										<p>Welcome to Notika <span class="bread-ntd">Admin Template</span></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+								<div class="breadcomb-report">
+									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcomb area End-->
     <!-- Start Status area -->
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                    <div class="wb-traffic-inner notika-shadow">
                         <div class="website-traffic-ctn">
                             <h2><span class="counter">50,000</span></h2>
                             <p>Total Website Traffics</p>
@@ -605,7 +632,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30">
                         <div class="website-traffic-ctn">
                             <h2><span class="counter">90,000</span>k</h2>
                             <p>Website Impressions</p>
@@ -635,240 +662,112 @@
         </div>
     </div>
     <!-- End Status area-->
-    <!-- Start Sale Statistic area-->
-    <div class="sale-statistic-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
-                    <div class="sale-statistic-inner notika-shadow mg-tb-30">
-                        <div class="curved-inner-pro">
-                            <div class="curved-ctn">
-                                <h2>Sales Statistics</h2>
-                                <p>Vestibulum purus quam scelerisque, mollis nonummy metus</p>
-                            </div>
-                        </div>
-                        <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
-                    <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
-                        <div class="past-day-statis">
-                            <h2>For The Past 30 Days</h2>
-                            <p>Fusce eget dolor id justo luctus the commodo vel pharetra nisi. Donec velit of libero.</p>
-                        </div>
-						<div class="dash-widget-visits"></div>
-                        <div class="past-statistic-an">
-                            <div class="past-statistic-ctn">
-                                <h3><span class="counter">3,20,000</span></h3>
-                                <p>Page Views</p>
-                            </div>
-                            <div class="past-statistic-graph">
-                                <div class="stats-bar"></div>
-                            </div>
-                        </div>
-                        <div class="past-statistic-an">
-                            <div class="past-statistic-ctn">
-                                <h3><span class="counter">1,03,000</span></h3>
-                                <p>Total Clicks</p>
-                            </div>
-                            <div class="past-statistic-graph">
-                                <div class="stats-line"></div>
-                            </div>
-                        </div>
-                        <div class="past-statistic-an">
-                            <div class="past-statistic-ctn">
-                                <h3><span class="counter">24,00,000</span></h3>
-                                <p>Site Visitors</p>
-                            </div>
-                            <div class="past-statistic-graph">
-                                <div class="stats-bar-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Sale Statistic area-->
     <!-- Start Email Statistic area-->
     <div class="notika-email-post-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="email-statis-inner notika-shadow">
-                        <div class="email-ctn-round">
-                            <div class="email-rdn-hd">
-								<h2>Email Statistics</h2>
+                    <div class="recent-signup-inner notika-shadow mg-t-30">
+                        <div class="realtime-ctn">
+                            <div class="realtime-title widget-inner-wp signup-hd-wd">
+                                <h2>Most Recent Signups</h2>
+                                <p>Magna cursus malesuada lacinia</p>
+                            </div>
+                        </div>
+                        <div class="widget-signup-list">
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="Anisha" href="#">A</a>
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="Weldro" href="#">W</a>
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="Smith" href="#"><img src="img/post/2.jpg" alt="" /></a>
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="Payel" href="#">P</a>
+                            <a class="signup-wd-mn" data-toggle="tooltip" data-placement="top" title="Salim Sha" href="#">S</a>
+                            <a data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Malika" href="#"><img src="img/post/4.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Elisha" href="#">E</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Bakis" href="#">B</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Smith" href="#"><img src="img/post/2.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Camerun" href="#">C</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Helina" href="#">H</a>
+                            <a data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Konika" href="#">K</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Smith" href="#"><img src="img/post/2.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Conika" href="#">C</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Onita" href="#">O</a>
+                            <a data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Unity" href="#">U</a>
+                            <a data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Gorila" href="#">G</a>
+                            <a data-toggle="tooltip" data-placement="top" title="Smith" href="#"><img src="img/post/2.jpg" alt="" /></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Fahima" href="#">F</a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="Anika" href="#">H</a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="Lemerun" href="#">K</a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="Chapan" href="#">C</a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="Heris" href="#">H</a>
+                            <a class="widgets-mg-sn" data-toggle="tooltip" data-placement="top" title="John Deo" href="#"><img src="img/post/1.jpg" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ongoing-task-inner notika-shadow mg-t-30">
+                        <div class="realtime-ctn">
+                            <div class="realtime-title ongoing-hd-wd">
+                                <h2>Ongoing Tasks</h2>
+                                <p>Magna cursus malesuada lacinia</p>
+                            </div>
+                        </div>
+                        <div class="skill-content-3 ongoing-tsk">
+                            <div class="skill">
+                                <div class="progress">
+                                    <div class="lead-content">
+                                        <p>HTML5 Validation Report</p>
+                                    </div>
+                                    <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>95%</span>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="lead-content">
+                                        <p>Google Chrome Extension</p>
+                                    </div>
+                                    <div class="progress-bar wow fadeInLeft" data-progress="85%" style="width: 85%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>85%</span> </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="lead-content">
+                                        <p>Social Internet Projects</p>
+                                    </div>
+                                    <div class="progress-bar wow fadeInLeft" data-progress="70%" style="width: 70%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>70%</span> </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="lead-content">
+                                        <p>Bootstrap Admin</p>
+                                    </div>
+                                    <div class="progress-bar wow fadeInLeft" data-progress="60%" style="width: 60%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>60%</span> </div>
+                                </div>
+                                <div class="progress progress-bt">
+                                    <div class="lead-content">
+                                        <p>Youtube App</p>
+                                    </div>
+                                    <div class="progress-bar wow fadeInLeft" data-progress="50%" style="width: 50%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>50%</span> </div>
+                                </div>
+                            </div>
+                            <div class="view-all-onging">
+                                <a href="#">View All Tasks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
+                        <div class="blog-img">
+                            <img src="img/blog/1.jpg" alt="" />
+                        </div>
+                        <div class="blog-ctn">
+                            <div class="blog-hd-sw">
+								<h2> The best viral website ideas!</h2>
+								<a class="bg-au" href="#">By Malinda on 9th June 2018</a>
 							</div>
-                            <div class="email-statis-wrap">
-                                <div class="email-round-nock">
-                                    <input type="text" class="knob" value="0" data-rel="55" data-linecap="round" data-width="130" data-bgcolor="#E4E4E4" data-fgcolor="#00c292" data-thickness=".10" data-readonly="true">
-                                </div>
-                                <div class="email-ctn-nock">
-                                    <p>Total Emails Sent</p>
-                                </div>
-                            </div>
-                            <div class="email-round-gp">
-                                <div class="email-round-pro">
-                                    <div class="email-signle-gp">
-                                        <input type="text" class="knob" value="0" data-rel="75" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#00c292" data-thickness=".10" data-readonly="true" disabled>
-                                    </div>
-                                    <div class="email-ctn-nock">
-                                        <p>Bounce Rate</p>
-                                    </div>
-                                </div>
-                                <div class="email-round-pro">
-                                    <div class="email-signle-gp">
-                                        <input type="text" class="knob" value="0" data-rel="35" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#00c292" data-thickness=".10" data-readonly="true" disabled>
-                                    </div>
-                                    <div class="email-ctn-nock">
-                                        <p>Total Opened</p>
-                                    </div>
-                                </div>
-                                <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
-                                    <div class="email-signle-gp">
-                                        <input type="text" class="knob" value="0" data-rel="45" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#00c292" data-thickness=".10" data-readonly="true" disabled>
-                                    </div>
-                                    <div class="email-ctn-nock">
-                                        <p>Total Ignored</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
-                        <div class="recent-post-ctn">
-                            <div class="recent-post-title">
-                                <h2>Recent Posts</h2>
-                            </div>
-                        </div>
-                        <div class="recent-post-items">
-                            <div class="recent-post-signle rct-pt-mg-wp">
-                                <a href="#">
-                                    <div class="recent-post-flex">
-                                        <div class="recent-post-img">
-                                            <img src="img/post/2.jpg" alt="" />
-                                        </div>
-                                        <div class="recent-post-it-ctn">
-                                            <h2>Smith</h2>
-                                            <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="recent-post-signle">
-                                <a href="#">
-                                    <div class="recent-post-flex rct-pt-mg">
-                                        <div class="recent-post-img">
-                                            <img src="img/post/1.jpg" alt="" />
-                                        </div>
-                                        <div class="recent-post-it-ctn">
-                                            <h2>John Deo</h2>
-                                            <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="recent-post-signle">
-                                <a href="#">
-                                    <div class="recent-post-flex rct-pt-mg">
-                                        <div class="recent-post-img">
-                                            <img src="img/post/4.jpg" alt="" />
-                                        </div>
-                                        <div class="recent-post-it-ctn">
-                                            <h2>Malika</h2>
-                                            <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="recent-post-signle">
-                                <a href="#">
-                                    <div class="recent-post-flex rct-pt-mg">
-                                        <div class="recent-post-img">
-                                            <img src="img/post/2.jpg" alt="" />
-                                        </div>
-                                        <div class="recent-post-it-ctn">
-                                            <h2>Smith</h2>
-                                            <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="recent-post-signle">
-                                <a href="#">
-                                    <div class="recent-post-flex rct-pt-mg">
-                                        <div class="recent-post-img">
-                                            <img src="img/post/1.jpg" alt="" />
-                                        </div>
-                                        <div class="recent-post-it-ctn">
-                                            <h2>John Deo</h2>
-                                            <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="recent-post-signle">
-                                <a href="#">
-                                    <div class="recent-post-flex rc-ps-vw">
-                                        <div class="recent-post-line rct-pt-mg">
-                                            <p>View All</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="recent-items-wp notika-shadow sm-res-mg-t-30">
-                        <div class="rc-it-ltd">
-                            <div class="recent-items-ctn">
-                                <div class="recent-items-title">
-                                    <h2>Recent Items</h2>
-                                </div>
-                            </div>
-                            <div class="recent-items-inn">
-                                <table class="table table-inner table-vmiddle">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th style="width: 60px">Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="f-500 c-cyan">4555</td>
-                                            <td>Samsung Galaxy Mega</td>
-                                            <td class="f-500 c-cyan">$921</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="f-500 c-cyan">4556</td>
-                                            <td>Huawei Ascend P6</td>
-                                            <td class="f-500 c-cyan">$240</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="f-500 c-cyan">8778</td>
-                                            <td>HTC One M8</td>
-                                            <td class="f-500 c-cyan">$400</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="f-500 c-cyan">5667</td>
-                                            <td>Samsung Galaxy Alpha</td>
-                                            <td class="f-500 c-cyan">$870</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="f-500 c-cyan">7886</td>
-                                            <td>LG G3</td>
-                                            <td class="f-500 c-cyan">$790</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-							<div id="recent-items-chart" class="flot-chart-items flot-chart vt-ct-it tb-rc-it-res"></div>
+                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                            <a class="vw-at" href="#">View Article...</a>
                         </div>
                     </div>
                 </div>
@@ -876,223 +775,118 @@
         </div>
     </div>
     <!-- End Email Statistic area-->
-    <!-- Start Realtime sts area-->
-    <div class="realtime-statistic-area">
+    <!-- Start Contact Info area-->
+    <div class="contact-info-area mg-t-30">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="realtime-wrap notika-shadow mg-t-30">
-                        <div class="realtime-ctn">
-                            <div class="realtime-title">
-                                <h2>Realtime Visitors</h2>
-                            </div>
+                    <div class="contact-inner">
+                        <div class="contact-hd widget-ctn-hd">
+                            <h2>Contact Information</h2>
+                            <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
                         </div>
-                        <div class="realtime-visitor-ctn">
-                            <div class="realtime-vst-sg">
-                                <h4><span class="counter">4,35,456</span></h4>
-                                <p>Visitors last 24h</p>
-                            </div>
-                            <div class="realtime-vst-sg">
-                                <h4><span class="counter">4,566</span></h4>
-                                <p>Visitors last 30m</p>
-                            </div>
+                        <div class="contact-dt">
+                            <ul class="contact-list widget-contact-list">
+                                <li><i class="notika-icon notika-phone"></i> +8801962067309</li>
+                                <li><i class="notika-icon notika-mail"></i> lucid@gmail.com</li>
+                                <li><i class="notika-icon notika-facebook"></i> facebook</li>
+                                <li><i class="notika-icon notika-twitter"></i> @lucid twitter</li>
+                                <li><i class="notika-icon notika-map"></i> 44-46 uttara Road, Bangladesh</li>
+                            </ul>
                         </div>
-                        <div class="realtime-map">
-                            <div class="vectorjsmarp" id="world-map"></div>
+                        <div class="contact-map widget-contact-map">
+                            <div id="map6"></div>
                         </div>
-                        <div class="realtime-country-ctn realtime-ltd-mg">
-                            <h5>September 4, 21:44:02 (2 Mins 56 Seconds)</h5>
-                            <div class="realtime-ctn-bw">
-                                <div class="realtime-ctn-st">
-                                    <span><img src="img/country/1.png" alt="" /></span> <span>United States</span>
-                                </div>
-                                <div class="realtime-bw">
-                                    <span>Firefox</span>
-                                </div>
-                                <div class="realtime-bw">
-                                    <span>Mac OSX</span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="contact-form sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                        <div class="contact-hd sm-form-hd">
+                            <h2>Sample Form</h2>
+                            <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
                         </div>
-                        <div class="realtime-country-ctn">
-                            <h5>September 7, 20:44:02 (5 Mins 56 Seconds)</h5>
-                            <div class="realtime-ctn-bw">
-                                <div class="realtime-ctn-st">
-                                    <span><img src="img/country/2.png" alt="" /></span> <span>Australia</span>
-                                </div>
-                                <div class="realtime-bw">
-                                    <span>Firefox</span>
-                                </div>
-                                <div class="realtime-bw">
-                                    <span>Mac OSX</span>
+                        <div class="contact-form-int">
+                            <div class="form-group">
+                                <div class="form-single nk-int-st widget-form">
+                                    <input type="text" class="form-control" placeholder="First Name" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="realtime-country-ctn">
-                            <h5>September 9, 19:44:02 (10 Mins 56 Seconds)</h5>
-                            <div class="realtime-ctn-bw">
-                                <div class="realtime-ctn-st">
-                                    <span><img src="img/country/3.png" alt="" /></span> <span>Brazil</span>
+                            <div class="form-group">
+                                <div class="form-single nk-int-st widget-form">
+                                    <input type="text" class="form-control" placeholder="Last Name" />
                                 </div>
-                                <div class="realtime-bw">
-                                    <span>Firefox</span>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-single nk-int-st widget-form">
+                                    <input type="email" class="form-control" placeholder="Email Address" />
                                 </div>
-                                <div class="realtime-bw">
-                                    <span>Mac OSX</span>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-single nk-int-st widget-form">
+                                    <input type="number" class="form-control" placeholder="Contact Number" />
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-single nk-int-st widget-form">
+                                    <textarea name="message" class="form-control" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="contact-btn">
+                                <button class="button btn">Button</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="add-todo-list notika-shadow mg-t-30">
-                        <div class="realtime-ctn">
-                            <div class="realtime-title">
-                                <h2>Add Todo</h2>
-                            </div>
+                    <div class="widget-tabs-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                        <div class="contact-hd tm-activity">
+                            <h2>Team Activity</h2>
+                            <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
                         </div>
-                        <div class="card-box">
-                            <div class="todoapp">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-sm-6 col-xs-12">
-                                        <h4 id="todo-message"><span id="todo-remaining"></span> of <span id="todo-total"></span> remaining</h4>
+                        <div class="widget-tabs-list">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#home">Tab One</a></li>
+                                <li><a data-toggle="tab" href="#menu1">Tab Two</a></li>
+                                <li><a data-toggle="tab" href="#menu2">Tab Three</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="tab-wd-img">
+                                        <img src="img/widgets/6.png" alt="" />
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="notika-todo-btn">
-                                            <a href="#" class="pull-right btn btn-primary btn-sm" id="btn-archive">Archive</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="notika-todo-scrollbar">
-                                    <ul class="list-group no-margn todo-list" id="todo-list"></ul>
-                                </div>
-                                <div id="todo-form">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12 col-sm-12 col-xs-12 todo-inputbar">
-                                            <div class="form-group todo-flex">
-                                                <div class="nk-int-st">
-                                                    <input type="text" id="todo-input-text" name="todo-input-text" class="form-control" placeholder="Add new todo">
-                                                </div>
-                                                <div class="todo-send">
-                                                    <button class="btn-primary btn-md btn-block btn notika-add-todo" type="button" id="todo-btn-submit">Add</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="tab-ctn">
+                                        <p>Serhoncus quis est sit amete in nisl molestie of fringilla. Nunc vitae ante magna feugiat condi. Serhoncus quis est cry int fly.</p>
+                                        <ul class="tab-ctn-list">
+											<li><i class="notika-icon notika-next"></i> Serhoncus quis est cry int fly.</li>
+                                            <li><i class="notika-icon notika-next"></i> Nisl molestie fringi cry int pro.</li>
+                                            <li><i class="notika-icon notika-next"></i> Maecenas sit amet urna cry int.</li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="notika-chat-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                        <div class="realtime-ctn">
-                            <div class="realtime-title">
-                                <h2>Chat Box</h2>
-                            </div>
-                        </div>
-                        <div class="card-box">
-                            <div class="chat-conversation">
-                                <div class="widgets-chat-scrollbar">
-                                    <ul class="conversation-list">
-                                        <li class="clearfix">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/1.jpg" alt="male">
-                                                <i>10:00</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap">
-                                                    <i>John Deo</i>
-                                                    <p>
-                                                        Hello!
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix odd">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/2.jpg" alt="Female">
-                                                <i>10:01</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap chat-widgets-cn">
-                                                    <i>Smith</i>
-                                                    <p>
-                                                        Hi, How are you? What about our next meeting?
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/1.jpg" alt="male">
-                                                <i>10:01</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap">
-                                                    <i>John Deo</i>
-                                                    <p>
-                                                        Yeah everything is fine
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix odd">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/2.jpg" alt="male">
-                                                <i>10:02</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap chat-widgets-cn">
-                                                    <i>Smith</i>
-                                                    <p>
-                                                        Wow that's great
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/1.jpg" alt="male">
-                                                <i>10:01</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap">
-                                                    <i>John Deo</i>
-                                                    <p>
-                                                        Doing Better i am thinking about that..
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix odd">
-                                            <div class="chat-avatar">
-                                                <img src="img/post/2.jpg" alt="male">
-                                                <i>10:02</i>
-                                            </div>
-                                            <div class="conversation-text">
-                                                <div class="ctext-wrap chat-widgets-cn">
-                                                    <i>Smith</i>
-                                                    <p>
-                                                        Wow, You also tallent man...
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div id="menu1" class="tab-pane fade">
+                                    <div class="tab-wd-img">
+                                        <img src="img/widgets/2.png" alt="" />
+                                    </div>
+                                    <div class="tab-ctn">
+                                        <p>Serhoncus quis est sit amete in nisl molestie of fringilla. Nunc vitae ante magna feugiat condi. Serhoncus quis est cry int fly.</p>
+                                        <ul class="tab-ctn-list">
+                                            <li><i class="notika-icon notika-next"></i> Serhoncus quis est cry int fly.</li>
+                                            <li><i class="notika-icon notika-next"></i> nisl molestie fringi cry int pro.</li>
+                                            <li><i class="notika-icon notika-next"></i> Maecenas sit amet urna cry int.</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="chat-widget-input">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12 col-sm-12 col-xs-12 chat-inputbar">
-                                            <div class="form-group todo-flex">
-                                                <div class="nk-int-st">
-                                                    <input type="text" class="form-control chat-input" placeholder="Enter your text">
-                                                </div>
-                                                <div class="chat-send">
-                                                    <button type="submit" class="btn btn-md btn-primary btn-block notika-chat-btn">Send</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div id="menu2" class="tab-pane fade">
+                                    <div class="tab-wd-img">
+                                        <img src="img/widgets/4.png" alt="" />
+                                    </div>
+                                    <div class="tab-ctn">
+                                        <p>Serhoncus quis est sit amete in nisl molestie of fringilla. Nunc vitae ante magna feugiat condi. Serhoncus quis est cry int fly.</p>
+                                        <ul class="tab-ctn-list">
+											<li><i class="notika-icon notika-next"></i> Serhoncus quis est cry int fly.</li>
+                                            <li><i class="notika-icon notika-next"></i> nisl molestie fringi cry int pro.</li>
+                                            <li><i class="notika-icon notika-next"></i> Maecenas sit amet urna cry int.</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -1102,7 +896,7 @@
             </div>
         </div>
     </div>
-    <!-- End Realtime sts area-->
+    <!-- End Contact Info area-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -1143,43 +937,34 @@
     <script src="js/counterup/jquery.counterup.min.js"></script>
     <script src="js/counterup/waypoints.min.js"></script>
     <script src="js/counterup/counterup-active.js"></script>
-    <!-- mCustomScrollbar JS
-		============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- jvectormap JS
-		============================================ -->
-    <script src="js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="js/jvectormap/jvectormap-active.js"></script>
     <!-- sparkline JS
 		============================================ -->
     <script src="js/sparkline/jquery.sparkline.min.js"></script>
     <script src="js/sparkline/sparkline-active.js"></script>
-    <!-- sparkline JS
-		============================================ -->
-    <script src="js/flot/jquery.flot.js"></script>
-    <script src="js/flot/jquery.flot.resize.js"></script>
-    <script src="js/flot/curvedLines.js"></script>
-    <script src="js/flot/flot-active.js"></script>
     <!-- knob JS
 		============================================ -->
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="js/flot/flot-widget-anatic-active.js"></script>
+    <script src="js/flot/chart-tooltips.js"></script>
+    <script src="js/flot/flot-active.js"></script>
     <!--  wave JS
 		============================================ -->
     <script src="js/wave/waves.min.js"></script>
     <script src="js/wave/wave-active.js"></script>
-    <!--  todo JS
-		============================================ -->
-    <script src="js/todo/jquery.todo.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-	<!--  Chat JS
+    <!-- Google map JS
 		============================================ -->
-    <script src="js/chat/moment.min.js"></script>
-    <script src="js/chat/jquery.chat.js"></script>
+    <script src="js/google.maps/google.maps-active.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVOIQ3qXUCmKVVV7DVexPzlgBcj5mQJmQ&callback=initMap"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>

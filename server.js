@@ -20,9 +20,30 @@ const client = new smartcar.AuthClient({
    testMode: true,
 });
 
+var carDB = {}
+
 app.use(express.static('public'));
 
+app.get('/car_info', function (req, res) {
+   // {"id":"048603ff-1775-4fba-9e44-ed905f89c54a","make":"TESLA","model":"Model 3","year":2018}
+   new smartcar.Vehicle(req.session.vehicle, req.session.token).info().then(function (response) {
+      console.log(JSON.stringify(response));
+      res.json(response);
+   });
+})
+
+//assumes carDB has correct car_id for all cars
+//for each key in carDB, 
+app.get('/getDB', function (req, res) {
+	Object.keys(carDB).forEach( (car_id) => {
+		carDB[car_id].push(	
+
+	}
+			//	req.session.vehicle
+})
+
 app.get('/location', function (req, res) {
+   // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
       console.log(JSON.stringify(response));
       res.json(response);
@@ -61,6 +82,7 @@ function getSpeeds(carid, locs) {
 }
 
 app.get('/odometer', function (req, res) {
+   // {"data":{"distance":17666.08984375},"age":"2019-03-30T22:31:57.195Z","unitSystem":"metric"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
       console.log(JSON.stringify(response));
       res.json(response);
@@ -71,7 +93,7 @@ app.get('/speed_limit', function (req, res) {
    var lon = parseFloat(req.param('lon'));
    var lat = parseFloat(req.param('lat'));
    console.log(lon + " " + lat);
-   
+
    //each degree lon/lat ~ 111 km (69 mi)
    //bounding box:
    var w = 10;
@@ -83,11 +105,11 @@ app.get('/speed_limit', function (req, res) {
 
    var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
    console.log(requri);
-   
+
    osmread.parse({
       url: requri,
       format: 'xml',
-      way: function(way){
+      way: function (way) {
          console.log('maxspeed: ' + way['tags']['maxspeed']);
          var start = Date.now();
          setTimeout(function(){
@@ -105,7 +127,7 @@ app.get('/speed_limit', function (req, res) {
 
 app.get('/login', function (req, res) {
    res.end(client.getAuthUrl());
-});
+})
 
 app.get('/register_vehicle', function (req, res) {
    let access;
@@ -133,6 +155,7 @@ app.get('/register_vehicle', function (req, res) {
       })
       .then(function (data) {
          console.log(data);
+         carDB[data['id']] = [];
          // {
          //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
          //   "make": "TESLA",
@@ -141,13 +164,13 @@ app.get('/register_vehicle', function (req, res) {
          // }
 
          // json response will be sent to the user
-         res.redirect('/index.html');
+         res.redirect('/dashboard.html');
       });
 })
 
 var server = app.listen(3000, function () {
-   var host = server.address().address
-   var port = server.address().port
+   var host = server.address().address;
+   var port = server.address().port;
 
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("pastapasta is listening at http://%s:%s", host, port);
 })

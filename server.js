@@ -35,11 +35,7 @@ app.get('/car_info', function (req, res) {
 //assumes carDB has correct car_id for all cars
 //for each key in carDB, 
 app.get('/getDB', function (req, res) {
-	Object.keys(carDB).forEach( (car_id) => {
-		carDB[car_id].push(	
-
-	}
-			//	req.session.vehicle
+      res.end(JSON.stringify(carDB));
 })
 
 app.get('/location', function (req, res) {
@@ -155,6 +151,13 @@ app.get('/register_vehicle', function (req, res) {
          res.redirect('/dashboard.html');
       });
 })
+
+setInterval( () => {Object.keys(carDB).forEach((car_id) => {
+      // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
+      smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
+            carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
+      })
+})}, 10000);
 
 var server = app.listen(3000, function () {
    var host = server.address().address;

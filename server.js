@@ -69,15 +69,12 @@ function getDistance(lon1, lat1, lon2, lat2) {
    return rad * dsigma;
 }
 
-function getSpeeds(carid, locs) {
-   if (locs.length < 2) return;
-   for (var i = 1; i < locs['carid'].length; i++) {
-      //console.log(locs[i]['lon'] + " " + locs[i]['lat'] + " " + locs[i-1]['lon'] + " " + locs[i-1]['lat']);
-      var dist = getDistance(locs[i]['lon'],locs[i]['lat'],locs[i-1]['lon'],locs[i-1]['lat']);
-      console.log('dist ' + dist);
-      var time = (locs[i]['time']-locs[i-1]['time'])/3600000;
-      //console.log('time ' + time);
-      locs[i]['speed'] = (dist/time);
+function getSpeeds(carID) {
+   if (carDB.length < 2) return;
+   for (var i = 1; i < carDB[carID].length; i++) {
+      var dist = getDistance(carDB[carID][i]['lon'],carDB[carID][i]['lat'],carDB[carID][i-1]['lon'],carDB[carID][i-1]['lat']);
+      var time = (carDB[carID][i]['time']-carDB[carID][i-1]['time'])/3600000;
+      carDB[carID][i]['speed'] = (dist/time);
    }
 }
 
@@ -111,15 +108,6 @@ app.get('/speed_limit', function (req, res) {
       format: 'xml',
       way: function (way) {
          console.log('maxspeed: ' + way['tags']['maxspeed']);
-         var start = Date.now();
-         setTimeout(function(){
-            var end = Date.now();
-            var locs = [{time:start, lat:38.635830, lon:-121.496319}, {time:end, lat:38.639945, lon:-121.483167}];
-            getSpeeds(locs);
-            for (var i = 1; i < locs.length; i++) {
-               console.log(locs[i]['speed']);
-            }
-         }, 2000);
          res.end(way['tags']['maxspeed']);
       },
    });

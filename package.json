@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/brianfu9/pastapasta/issues"
   },
-  "homepage": "https://github.com/brianfu9/pastapasta#readme"
+  "homepage": "https://github.com/brianfu9/pastapasta#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

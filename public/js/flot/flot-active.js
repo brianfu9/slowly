@@ -1,5 +1,8 @@
 (function ($) {
  "use strict";
+ function getCarData() {
+     for (i = 0; i < CarData.length; )
+ }
  
  function getRandomData() {
 			for (data.length > 0 && (data = data.slice(1)); data.length < totalPoints;) {

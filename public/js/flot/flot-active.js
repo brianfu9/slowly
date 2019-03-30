@@ -20,7 +20,8 @@
 		}
 		for (var data = [], totalPoints = 100, d1 = [], i = 0; 10 >= i; i += 1) d1.push([i, parseInt(30 * Math.random())]);
 		for (var d2 = [], i = 0; 20 >= i; i += 1) d2.push([i, parseInt(30 * Math.random())]);
-		for (var d3 = [], i = 0; 10 >= i; i += 1) d3.push([i, parseInt(30 * Math.random())]);
+        for (var d3 = [], i = 0; 10 >= i; i += 1) d3.push([i, parseInt(30 * Math.random())]);
+        
 		var options = {
 			series: {
 				shadowSize: 0,
@@ -93,6 +94,7 @@
     for (var d1 = [], i = 0; 10 >= i; i += 1) d1.push([i, parseInt(30 * 2)]);
     for (var d2 = [], i = 0; 20 >= i; i += 1) d2.push([i, parseInt(30 * 4)]);
     for (var d3 = [], i = 0; CarData.length >= i; i += 1) d3.push([i, parseInt(30 * CarData[i])]);
+    var d4 = [[2011, 10], [2012, 20],[2013, 30],[2014, 40]]
     var options = {
         series: {
             shadowSize: 0,
@@ -127,7 +129,7 @@
         }
     };
     $("#curved-line-chart")[0] && $.plot($("#curved-line-chart"), [{
-        data: d3,
+        data: d4,
         lines: {
             show: !0,
             fill: .98

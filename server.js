@@ -1,11 +1,11 @@
 var express = require('express');
-var Smartcar = require('smartcar');
+var smartcar = require('smartcar');
 var app = express();
 
-const client = new Smartcar.AuthClient({
+const client = new smartcar.AuthClient({
    clientId: '44507a27-e650-40f5-a7a3-9ae57051e821',
    clientSecret: '1a10dfd4-0382-4c3b-b836-c712bf6fc89e',
-   redirectUri: 'https://javascript-sdk.smartcar.com/redirect-2.1.0?app_origin=http://localhost:3000',
+   redirectUri: 'http://localhost:3000/register_vehicle',
    scope: ['read_vehicle_info', 'read_location', 'read_vin', 'read_odometer'],
    testMode: true,
 });
@@ -20,7 +20,7 @@ app.get('/api/v1/orders', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-   res.redirect(client.getAuthUrl());
+   res.end(client.getAuthUrl());
 });
 
 app.get('/register_vehicle', function (req, res) {

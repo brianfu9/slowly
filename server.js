@@ -5,8 +5,6 @@ const request = require('request');
 var osmread = require('osm-read-boolive');
 var app = express();
 
-
-
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
 
 app.use(function (req, res, next) {
@@ -22,6 +20,8 @@ const client = new smartcar.AuthClient({
    scope: ['read_vehicle_info', 'read_location', 'read_vin', 'read_odometer'],
    testMode: true,
 });
+
+var carDB = {}
 
 app.use(express.static('public'));
 

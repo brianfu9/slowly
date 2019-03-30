@@ -5,6 +5,8 @@ const request = require('request');
 var osmread = require('osm-read-boolive');
 var app = express();
 
+
+
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
 
 app.use(function (req, res, next) {
@@ -28,6 +30,9 @@ app.get('/car_info', function (req, res) {
       console.log(JSON.stringify(response));
       res.json(response);
    });
+
+app.get('/getDB', function (req, res) {
+	res.end('');
 })
 
 app.get('/location', function (req, res) {
@@ -119,5 +124,5 @@ var server = app.listen(3000, function () {
    var host = server.address().address
    var port = server.address().port
 
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("pastapasta is listening at http://%s:%s", host, port)
 })

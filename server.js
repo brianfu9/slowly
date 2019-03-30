@@ -23,6 +23,13 @@ const client = new smartcar.AuthClient({
 
 app.use(express.static('public'));
 
+app.get('/car_info', function (req, res) {
+   new smartcar.Vehicle(req.session.vehicle, req.session.token).info().then(function (response) {
+      console.log(JSON.stringify(response));
+      res.json(response);
+   });
+})
+
 app.get('/location', function (req, res) {
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
       console.log(JSON.stringify(response));
@@ -41,7 +48,7 @@ app.get('/speed_limit', function (req, res) {
    var lon = parseFloat(req.param('lon'));
    var lat = parseFloat(req.param('lat'));
    console.log(lon + " " + lat);
-   
+
    //each degree lon/lat ~ 111 km (69 mi)
    //bounding box:
    var w = 10;
@@ -53,17 +60,17 @@ app.get('/speed_limit', function (req, res) {
 
    var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
    console.log(requri);
-   
+
    osmread.parse({
       //37.753183, -121.908984
       url: `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`,
       format: 'xml',
-      way: function(way){
+      way: function (way) {
          console.log('maxspeed: ' + way['tags']['maxspeed']);
          //res.end(way['tags']['maxspeed']);
       },
    });
-   
+
 })
 
 app.get('/login', function (req, res) {
@@ -104,7 +111,7 @@ app.get('/register_vehicle', function (req, res) {
          // }
 
          // json response will be sent to the user
-         res.redirect('/index.html');
+         res.redirect('/dashboard.html');
       });
 })
 

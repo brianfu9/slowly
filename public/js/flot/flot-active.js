@@ -1,8 +1,16 @@
 (function ($) {
  "use strict";
+ CarData = [10,12,14,16,20]
  function getCarData() {
-     for (i = 0; i < CarData.length; )
+     var res =[]
+     for (i = 0; i < CarData.length; i += 1){
+        res.push([i, CarData[i]]);
+     }
+     return res
  }
+
+ 
+ 
  
  function getRandomData() {
 			for (data.length > 0 && (data = data.slice(1)); data.length < totalPoints;) {

@@ -26,6 +26,7 @@ var carDB = {}
 app.use(express.static('public'));
 
 app.get('/car_info', function (req, res) {
+   // {"id":"048603ff-1775-4fba-9e44-ed905f89c54a","make":"TESLA","model":"Model 3","year":2018}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).info().then(function (response) {
       console.log(JSON.stringify(response));
       res.json(response);
@@ -38,6 +39,7 @@ app.get('/getDB', function (req, res) {
 })
 
 app.get('/location', function (req, res) {
+   // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
       console.log(JSON.stringify(response));
       res.json(response);
@@ -45,6 +47,7 @@ app.get('/location', function (req, res) {
 })
 
 app.get('/odometer', function (req, res) {
+   // {"data":{"distance":17666.08984375},"age":"2019-03-30T22:31:57.195Z","unitSystem":"metric"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
       console.log(JSON.stringify(response));
       res.json(response);
@@ -110,6 +113,7 @@ app.get('/register_vehicle', function (req, res) {
       })
       .then(function (data) {
          console.log(data);
+         carDB[data['id']] = [];
          // {
          //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
          //   "make": "TESLA",

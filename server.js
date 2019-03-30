@@ -1,7 +1,6 @@
 var express = require('express');
 var smartcar = require('smartcar');
 var session = require('express-session');
-const request = require('request');
 var osmread = require('osm-read-boolive');
 var app = express();
 
@@ -30,6 +29,37 @@ app.get('/location', function (req, res) {
    });
 })
 
+//38.635830, -121.496319
+//38.639945, -121.483167
+//console.log(getDistance(-121.496319,38.635830,-121.483167,38.639945));
+//
+function getDistance(lon1, lat1, lon2, lat2) {
+   //lat => phi, lon => lambda
+   var phi1 = lon1 * Math.PI / 180;
+   var lambda1 = lat1 * Math.PI / 180;
+   var phi2 = lon2 * Math.PI / 180;
+   var lambda2 = lat2 * Math.PI / 180;
+   var dlambda = Math.abs(lambda2 - lambda1)
+   
+   var rad = 6371; //km
+   var num = Math.sqrt(Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
+   var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
+   var dsigma = Math.atan2(num, denom);
+   return rad * dsigma;
+}
+
+function getSpeeds(carid, locs) {
+   if (locs.length < 2) return;
+   for (var i = 1; i < locs['carid'].length; i++) {
+      //console.log(locs[i]['lon'] + " " + locs[i]['lat'] + " " + locs[i-1]['lon'] + " " + locs[i-1]['lat']);
+      var dist = getDistance(locs[i]['lon'],locs[i]['lat'],locs[i-1]['lon'],locs[i-1]['lat']);
+      console.log('dist ' + dist);
+      var time = (locs[i]['time']-locs[i-1]['time'])/3600000;
+      //console.log('time ' + time);
+      locs[i]['speed'] = (dist/time);
+   }
+}
+
 app.get('/odometer', function (req, res) {
    new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
       console.log(JSON.stringify(response));
@@ -45,7 +75,7 @@ app.get('/speed_limit', function (req, res) {
    //each degree lon/lat ~ 111 km (69 mi)
    //bounding box:
    var w = 10;
-   var offset = 0.0001;
+   var offset = 0.00002;
    var minLon = lon - offset;
    var minLat = lat - offset;
    var maxLon = lon + offset;
@@ -55,15 +85,22 @@ app.get('/speed_limit', function (req, res) {
    console.log(requri);
    
    osmread.parse({
-      //37.753183, -121.908984
-      url: `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`,
+      url: requri,
       format: 'xml',
       way: function(way){
          console.log('maxspeed: ' + way['tags']['maxspeed']);
-         //res.end(way['tags']['maxspeed']);
+         var start = Date.now();
+         setTimeout(function(){
+            var end = Date.now();
+            var locs = [{time:start, lat:38.635830, lon:-121.496319}, {time:end, lat:38.639945, lon:-121.483167}];
+            getSpeeds(locs);
+            for (var i = 1; i < locs.length; i++) {
+               console.log(locs[i]['speed']);
+            }
+         }, 2000);
+         res.end(way['tags']['maxspeed']);
       },
    });
-   
 })
 
 app.get('/login', function (req, res) {

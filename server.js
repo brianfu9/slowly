@@ -1,6 +1,15 @@
 var express = require('express');
 var smartcar = require('smartcar');
+var session = require('express-session');
 var app = express();
+
+app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 const client = new smartcar.AuthClient({
    clientId: '44507a27-e650-40f5-a7a3-9ae57051e821',

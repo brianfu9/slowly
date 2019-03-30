@@ -19,6 +19,7 @@
   "dependencies": {
     "@smartcar/auth": "^2.1.0",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "smartcar": "^4.4.0"
   }
 }

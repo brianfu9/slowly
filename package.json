@@ -20,6 +20,9 @@
     "@smartcar/auth": "^2.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
+    "jsdom": "^14.0.0",
+    "request": "^2.88.0",
     "smartcar": "^4.4.0"
   }
 }

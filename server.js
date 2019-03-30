@@ -1,6 +1,7 @@
 var express = require('express');
 var smartcar = require('smartcar');
 var session = require('express-session');
+const request = require('request');
 var app = express();
 
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
@@ -27,8 +28,15 @@ app.get('/coords', function (req, res) {
     });
 })
 
-app.get('/speed_limit', function (freq, res) {
-   // google maps api
+app.get('/speed_limit', function (req, res) {
+   var lon = req.param(lon);
+   var lat = req.param(lat);
+
+   request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
+   if (err) { return console.log(err); }
+   console.log(body.url);
+   console.log(body.explanation);
+   });
 })
 
 app.get('/login', function (req, res) {

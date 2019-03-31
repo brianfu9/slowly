@@ -204,7 +204,7 @@ app.get('/register_vehicle', function (req, res) {
                   console.log("points: " + points[car_id]);
                })
             })
-         }, 5000);
+         }, 10000);
          res.redirect('/dashboard.html');
       });
 })

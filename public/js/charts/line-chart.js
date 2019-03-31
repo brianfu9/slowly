@@ -12,8 +12,8 @@
 			datasets: [{
 				label: "My First dataset",
 				fill: false,
-                backgroundColor: '#00c292',
-				borderColor: '#00c292',
+                backgroundColor: '#f60',
+				borderColor: '#f60',
 				data: [9, 12, 19]
             }, {
                 label: "My Second dataset",
@@ -69,8 +69,8 @@
 			datasets: [{
 				label: "Cubic interpolation",
 				fill: false,
-                backgroundColor: '#00c292',
-				borderColor: '#00c292',
+                backgroundColor: '#f60',
+				borderColor: '#f60',
 				data: [0, 15, 17, 200, 0, 12, -200, 5, 200, 8, 200, 12, 200],
 				cubicInterpolationMode: 'monotone'
             }, {
@@ -182,8 +182,8 @@
 			labels: ["May", "June", "July"],
 			datasets: [{
 				label: "My First dataset",
-				backgroundColor: '#00c292',
-				borderColor: '#00c292',
+				backgroundColor: '#f60',
+				borderColor: '#f60',
 				data: [0, 10, 20, 30, 40, 50, 60],
 				fill: false,
 				pointRadius: 4,

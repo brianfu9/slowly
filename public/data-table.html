@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard One | Notika - Notika Admin Template</title>
+    <title>Data Table | Notika - Notika Admin Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -16,7 +16,7 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Bootstrap CSS
+    <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- owl.carousel CSS
@@ -33,18 +33,19 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
-    <!-- jvectormap CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/jvectormap/jquery-jvectormap-2.0.3.css">
-    <!-- notika icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/notika-custom-icon.css">
     <!-- wave CSS
 		============================================ -->
     <link rel="stylesheet" href="css/wave/waves.min.css">
+    <link rel="stylesheet" href="css/wave/button.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/notika-custom-icon.css">
+    <!-- Data Table JS
+		============================================ -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="css/main.css">
@@ -57,6 +58,8 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -82,41 +85,68 @@
         </div>
     </div>
     <!-- End Header Top Area -->
-   
-    
-    
-    <!-- Start Sale Statistic area-->
-    <div class="sale-statistic-area">
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
-                    <div class="sale-statistic-inner notika-shadow mg-tb-30">
-                        <div class="curved-inner-pro">
-                            <div class="curved-ctn">
-                                <h2>Sales Statistics</h2>
-                                
-                                <p id="makemodel">Speed Statistics for 
-                                    <script> 
-                                            $.get('/car_info', (car_info) => {
-                                                let car_make = car_info["make"];
-                                                let car_model = car_info["model"];
-                                                let htmlstr = car_make+ " " + car_model;
-                                            }                                
-                                   </script>    
-                                   $('#makemodel').html = htmlstr
-                                </p>
-                                
-                            </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Basic Example</h2>
+                            <p>It's just that simple. Turn your simple table into a sophisticated data table and offer
+                                your users a nice experience and great features without any effort.</p>
                         </div>
-                        <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Lat</th>
+                                        <th>Lon</th>
+                                        <th>Time</th>
+                                        <th>Speed</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vehicle-speed-db">
+                                </tbody>
+                                <script>
+                                    $.get('/getDB', (carDB) => {
+                                        var carsDB = JSON.parse(carDB);
+                                        console.log(JSON.stringify(carsDB));
+                                        $.get('/car_info', (car_info) => {
+                                            var html_string = "";
+                                            var car_id = car_info['id'];
+                                            var car_array = carsDB[car_id];
+                                            car_array.forEach((row_obj) => {
+                                                html_string += `<tr>
+                                                    <td>${car_info['year']} ${car_info['make']} ${car_info['model']}</td>
+                                                    <td>${row_obj['lat']}</td>
+                                                    <td>${row_obj['lon']}</td>
+                                                    <td>${row_obj['time']}</td>
+                                                    <td>speedy quik</td>
+                                                </tr>`
+                                            });
+                                            $('#vehicle-speed-db').html = html_string;
+                                        });
+                                    });
+                                </script>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Lat</th>
+                                        <th>Lon</th>
+                                        <th>Time</th>
+                                        <th>Speed</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <!-- End Sale Statistic area-->
-  
+    <!-- Data Table area End-->
     <!-- jquery
 		============================================ -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -146,40 +176,37 @@
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- jvectormap JS
-		============================================ -->
-    <script src="js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="js/jvectormap/jvectormap-active.js"></script>
     <!-- sparkline JS
 		============================================ -->
     <script src="js/sparkline/jquery.sparkline.min.js"></script>
     <script src="js/sparkline/sparkline-active.js"></script>
-    <!-- sparkline JS
+    <!-- flot JS
 		============================================ -->
     <script src="js/flot/jquery.flot.js"></script>
     <script src="js/flot/jquery.flot.resize.js"></script>
-    <script src="js/flot/curvedLines.js"></script>
     <script src="js/flot/flot-active.js"></script>
     <!-- knob JS
 		============================================ -->
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
+    <!--  Chat JS
+		============================================ -->
+    <script src="js/chat/jquery.chat.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="js/todo/jquery.todo.js"></script>
     <!--  wave JS
 		============================================ -->
     <script src="js/wave/waves.min.js"></script>
     <script src="js/wave/wave-active.js"></script>
-    <!--  todo JS
-		============================================ -->
-    <script src="js/todo/jquery.todo.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-	<!--  Chat JS
+    <!-- Data Table JS
 		============================================ -->
-    <script src="js/chat/moment.min.js"></script>
-    <script src="js/chat/jquery.chat.js"></script>
+    <script src="js/data-table/jquery.dataTables.min.js"></script>
+    <script src="js/data-table/data-table-act.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>

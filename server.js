@@ -192,28 +192,6 @@ app.get('/register_vehicle', function (req, res) {
       });
 })
 
-setInterval( () => {Object.keys(carDB).forEach((car_id) => {
-      // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
-      smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
-         let len = carDB[car_id].length;
-         let cartime = new Date(car["age"]);
-         let carlat = car["data"]["latitude"];
-         let carlon = car["data"]["longitude"];
-         let carspeed = 0;
-         if (carDB[car_id].length >= 1) {
-            let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
-            let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
-            carspeed = (dist/time);
-         }
-         //let isspeeding = carspeed > speedLimit(carlon, carlat);
-         carDB[car_id].push({ time: cartime, 
-         lat: carlat, 
-         lon: carlon,
-         speed: carspeed,});
-         findIsSpeeding(car_id, carDB[car_id].length-1);
-      })
-})}, 10000);
-
 var server = app.listen(3000, function () {
    var host = server.address().address;
    var port = server.address().port;

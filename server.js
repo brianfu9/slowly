@@ -62,19 +62,35 @@ app.get('/location', function (req, res) {
 //console.log(getDistance(-121.496319,38.635830,-121.483167,38.639945));
 //
 function getDistance(lon1, lat1, lon2, lat2) {
+   console.log(lon1 + " " + lat1 + " " + lon2 + " " + lat2);
    //lat => phi, lon => lambda
-   var phi1 = lon1 * Math.PI / 180;
-   var lambda1 = lat1 * Math.PI / 180;
-   var phi2 = lon2 * Math.PI / 180;
-   var lambda2 = lat2 * Math.PI / 180;
-   var dlambda = Math.abs(lambda2 - lambda1)
+   // var phi1 = lon1 * Math.PI / 180;
+   // var lambda1 = lat1 * Math.PI / 180;
+   // var phi2 = lon2 * Math.PI / 180;
+   // var lambda2 = lat2 * Math.PI / 180;
+   // var dlambda = Math.abs(lambda2 - lambda1);
 
-   var rad = 6371; //km
-   var num = Math.sqrt(Math.cos(phi2) * Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
-   var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
-   console.log(num + " " + denom);
-   var dsigma = Math.atan2(num, denom);
-   return rad * dsigma;
+   // var rad = 6371; //km
+   // // var num = Math.sqrt(Math.cos(phi2) * Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
+   // // var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
+   // // //console.log(num + " " + denom);
+   // // var dsigma = Math.atan2(num, denom);
+
+   // var dsigma = Math.acos(Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda));
+
+   var R = 6371; // metres
+   var φ1 = lat1*Math.PI/180;
+   var φ2 = lat2*Math.PI/180;
+   var Δφ = (lat2-lat1)*Math.PI/180;
+   var Δλ = (lon2-lon1)*Math.PI/180;
+
+   var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+         Math.cos(φ1) * Math.cos(φ2) *
+         Math.sin(Δλ/2) * Math.sin(Δλ/2);
+   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+   var d = R * c;
+   return d;
 }
 
 app.get('/odometer', function (req, res) {
@@ -104,7 +120,7 @@ function findIsSpeeding(car_id, ind) {
          let spdLimit = way['tags']['maxspeed'];
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
-         if (ind > 0 && carDB[car_id][ind]['speed'] > 1) {
+         if (ind > 0 && (carDB[car_id][ind]['speed'] > 120 || carDB[car_id][ind]['speed'] > 1)) {
             carDB[car_id][ind]['speeding'] = true;
          }
       },
@@ -160,25 +176,27 @@ app.get('/register_vehicle', function (req, res) {
                   let carlon = car["data"]["longitude"];
                   let carspeed = 0;
                   if (len >= 1) {
-                     let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
-                     let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
+                     let dist = getDistance(carlon, carlat, carDB[car_id][len - 1]['lon'], carDB[car_id][len - 1]['lat']);
+                     let time = (cartime - carDB[car_id][len - 1]['time']) / 3600000;
                      console.log("distance " + dist + " time " + time);
-                     carspeed = (dist/time);
+                     carspeed = (dist / time);
                   }
                   //let isspeeding = carspeed > speedLimit(carlon, carlat);
-                  carDB[car_id].push({ time: cartime, 
-                  lat: carlat, 
-                  lon: carlon,
-                  speed: carspeed,
-                  speeding: false});
+                  carDB[car_id].push({
+                     time: cartime,
+                     lat: carlat,
+                     lon: carlon,
+                     speed: carspeed,
+                     speeding: false
+                  });
                   console.log("updating " + carDB[car_id].length + " speed: " + carspeed);
-                  findIsSpeeding(car_id, carDB[car_id].length-1);
+                  findIsSpeeding(car_id, carDB[car_id].length - 1);
                   //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
                   //points stufffffff
                   if (!(car_id in points)) {
                      points[car_id] = 0;
                   }
-                  if (carDB[car_id][carDB[car_id].length-1]['speeding']) {
+                  if (carDB[car_id][carDB[car_id].length - 1]['speeding']) {
                      points[car_id] = points[car_id] - 50;
                   } else {
                      points[car_id] = points[car_id] + 10;
@@ -186,7 +204,7 @@ app.get('/register_vehicle', function (req, res) {
                   console.log("points: " + points[car_id]);
                })
             })
-         }, 10000);
+         }, 5000);
          res.redirect('/dashboard.html');
       });
 })

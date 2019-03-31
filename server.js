@@ -24,6 +24,14 @@ var carDB = {}
 
 app.use(express.static('public'));
 
+app.get('/continue', function (req, res) {
+   if (req.session.vehicle) {
+      res.redirect('/dashboard.html');
+   } else {
+      res.redirect('/register.html');
+   }
+})
+
 app.get('/car_info', function (req, res) {
    // {"id":"048603ff-1775-4fba-9e44-ed905f89c54a","make":"TESLA","model":"Model 3","year":2018}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).info().then(function (response) {

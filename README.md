@@ -10,3 +10,6 @@ array of json objects
 ]}
 Key is time stamp
 value is location
+
+keep track of points in dict: 
+{car_id : points, ...}

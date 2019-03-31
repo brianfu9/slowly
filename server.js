@@ -70,8 +70,9 @@ function getDistance(lon1, lat1, lon2, lat2) {
    var dlambda = Math.abs(lambda2 - lambda1)
 
    var rad = 6371; //km
-   var num = Math.sqrt(Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
+   var num = Math.sqrt(Math.cos(phi2) * Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
    var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
+   console.log(num + " " + denom);
    var dsigma = Math.atan2(num, denom);
    return rad * dsigma;
 }

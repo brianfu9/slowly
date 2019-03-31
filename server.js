@@ -49,6 +49,10 @@ app.get('/getDB', function (req, res) {
    res.end(JSON.stringify(carDB));
 })
 
+app.get('/getPoints', function(req, res) {
+   res.end(JSON.stringify(points));
+})
+
 app.get('/location', function (req, res) {
    // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).location().then(function (response) {
@@ -120,8 +124,12 @@ function findIsSpeeding(car_id, ind) {
          let spdLimit = way['tags']['maxspeed'];
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
-         if (ind > 0 && (carDB[car_id][ind]['speed'] > 120 || carDB[car_id][ind]['speed'] > 1)) {
+         if (ind > 0 && (carDB[car_id][ind]['speed'] <= 120 && carDB[car_id][ind]['speed'] > i)) {
             carDB[car_id][ind]['speeding'] = true;
+            if (!(car_id in points)) {
+               points[car_id] = 0;
+            }
+            points[car_id] = points[car_id] - 60;
          }
       },
    });
@@ -182,26 +190,27 @@ app.get('/register_vehicle', function (req, res) {
                      carspeed = (dist / time);
                   }
                   //let isspeeding = carspeed > speedLimit(carlon, carlat);
+                  let isspeeding = carspeed > 120;
                   carDB[car_id].push({
                      time: cartime,
                      lat: carlat,
                      lon: carlon,
                      speed: carspeed,
-                     speeding: false
+                     speeding: isspeeding
                   });
-                  console.log("updating " + carDB[car_id].length + " speed: " + carspeed);
-                  findIsSpeeding(car_id, carDB[car_id].length - 1);
-                  //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
-                  //points stufffffff
                   if (!(car_id in points)) {
                      points[car_id] = 0;
                   }
-                  if (carDB[car_id][carDB[car_id].length - 1]['speeding']) {
+                  if (isspeeding) {
                      points[car_id] = points[car_id] - 50;
                   } else {
                      points[car_id] = points[car_id] + 10;
                   }
-                  console.log("points: " + points[car_id]);
+                  console.log("updating " + carDB[car_id].length + " speed: " + carspeed);
+                  findIsSpeeding(car_id, carDB[car_id].length - 1);
+                  //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
+                  //points stufffffff
+                  console.log("points " + points[car_id]);
                })
             })
          }, 10000);

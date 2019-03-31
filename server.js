@@ -75,15 +75,6 @@ function getDistance(lon1, lat1, lon2, lat2) {
    return rad * dsigma;
 }
 
-function getSpeeds(car_id) {
-   if (carDB.length < 2) return;
-   for (var i = 1; i < carDB[car_id].length; i++) {
-      var dist = getDistance(carDB[car_id][i]['lon'], carDB[car_id][i]['lat'], carDB[car_id][i - 1]['lon'], carDB[car_id][i - 1]['lat']);
-      var time = (carDB[car_id][i]['time'] - carDB[car_id][i - 1]['time']) / 3600000;
-      carDB[car_id][i]['speed'] = (dist / time);
-   }
-}
-
 app.get('/odometer', function (req, res) {
    // {"data":{"distance":17666.08984375},"age":"2019-03-30T22:31:57.195Z","unitSystem":"metric"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
@@ -136,7 +127,7 @@ function findIsSpeeding(car_id, ind) {
          let spdLimit = way['tags']['maxspeed'];
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
-         
+
       },
    });
 }

@@ -2,6 +2,8 @@ var express = require('express');
 var smartcar = require('smartcar');
 var session = require('express-session');
 var osmread = require('osm-read-boolive');
+const request = require('request');
+var parseString = require('xml2js').parseString;
 var app = express();
 
 app.use(session({ secret: 'one_time_like_first_grade_i_just_randomly_spit_on_someones_car' }));
@@ -90,32 +92,54 @@ app.get('/odometer', function (req, res) {
    });
 })
 
-app.get('/speed_limit', function (req, res) {
-   var lon = parseFloat(req.param('lon'));
-   var lat = parseFloat(req.param('lat'));
-   console.log(lon + " " + lat);
+// function speedLimit(lon, lat) {
+//    //each degree lon/lat ~ 111 km (69 mi)
+//    //bounding box:
+//    var w = 10;
+//    var offset = 0.00002;
+//    var minLon = lon - offset;
+//    var minLat = lat - offset;
+//    var maxLon = lon + offset;
+//    var maxLat = lat + offset;
 
+//    var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
+//    console.log(requri);
+//    osmread.parse({
+//       url: requri,
+//       format: 'xml',
+//       way: function (way) {
+//          console.log('maxspeed: ' + way['tags']['maxspeed']);
+//          let spdLimit = way['tags']['maxspeed']
+//          console.log("hello"  + spdLimit);
+//          let i = parseInt(spdLimit.slice(0, -4));
+//          console.log("i = " + i);
+//       },
+//    });
+// }
+
+function findIsSpeeding(car_id, ind) {
    //each degree lon/lat ~ 111 km (69 mi)
    //bounding box:
    var w = 10;
    var offset = 0.00002;
-   var minLon = lon - offset;
-   var minLat = lat - offset;
-   var maxLon = lon + offset;
-   var maxLat = lat + offset;
+   var minLon = carDB[car_id][ind]['lon'] - offset;
+   var minLat = carDB[car_id][ind]['lat'] - offset;
+   var maxLon = carDB[car_id][ind]['lon'] + offset;
+   var maxLat = carDB[car_id][ind]['lat'] + offset;
 
    var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
    console.log(requri);
-
    osmread.parse({
       url: requri,
       format: 'xml',
       way: function (way) {
-         console.log('maxspeed: ' + way['tags']['maxspeed']);
-         res.end(way['tags']['maxspeed']);
+         let spdLimit = way['tags']['maxspeed'];
+         console.log('maxspeed: ' + spdLimit);
+         let i = parseInt(spdLimit.slice(0, -4));
+         
       },
    });
-})
+}
 
 app.get('/login', function (req, res) {
    res.end(client.getAuthUrl());
@@ -167,6 +191,28 @@ app.get('/register_vehicle', function (req, res) {
          res.redirect('/dashboard.html');
       });
 })
+
+setInterval( () => {Object.keys(carDB).forEach((car_id) => {
+      // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
+      smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
+         let len = carDB[car_id].length;
+         let cartime = new Date(car["age"]);
+         let carlat = car["data"]["latitude"];
+         let carlon = car["data"]["longitude"];
+         let carspeed = 0;
+         if (carDB[car_id].length >= 1) {
+            let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
+            let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
+            carspeed = (dist/time);
+         }
+         //let isspeeding = carspeed > speedLimit(carlon, carlat);
+         carDB[car_id].push({ time: cartime, 
+         lat: carlat, 
+         lon: carlon,
+         speed: carspeed,});
+         findIsSpeeding(car_id, carDB[car_id].length-1);
+      })
+})}, 10000);
 
 var server = app.listen(3000, function () {
    var host = server.address().address;

@@ -90,7 +90,7 @@
           <div class="widget-tabs-int">
             <div class="tab-hd">
               <h1>$lowly</h1>
-              <button type="button" class="btn btn-primary" style="float:right; margin-right:5%;">Continue!</button>
+              <button type="button" class="btn btn-primary" style="float:right; margin-right:5%;" onclick="$.get('/continue', function(data) {document.location.href=data})">Continue!</button>
             </div>
             <div class="widget-tabs-list">
               <ul class="nav nav-tabs">

@@ -26,9 +26,9 @@ app.use(express.static('public'));
 
 app.get('/continue', function (req, res) {
    if (req.session.vehicle) {
-      res.redirect('/dashboard.html');
+      res.end('/dashboard.html');
    } else {
-      res.redirect('/register.html');
+      res.end('/register.html');
    }
 })
 
@@ -43,7 +43,7 @@ app.get('/car_info', function (req, res) {
 //assumes carDB has correct car_id for all cars
 //for each key in carDB, 
 app.get('/getDB', function (req, res) {
-      res.end(JSON.stringify(carDB));
+   res.end(JSON.stringify(carDB));
 })
 
 app.get('/location', function (req, res) {
@@ -65,7 +65,7 @@ function getDistance(lon1, lat1, lon2, lat2) {
    var phi2 = lon2 * Math.PI / 180;
    var lambda2 = lat2 * Math.PI / 180;
    var dlambda = Math.abs(lambda2 - lambda1)
-   
+
    var rad = 6371; //km
    var num = Math.sqrt(Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
    var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
@@ -76,9 +76,9 @@ function getDistance(lon1, lat1, lon2, lat2) {
 function getSpeeds(car_id) {
    if (carDB.length < 2) return;
    for (var i = 1; i < carDB[car_id].length; i++) {
-      var dist = getDistance(carDB[car_id][i]['lon'],carDB[car_id][i]['lat'],carDB[car_id][i-1]['lon'],carDB[car_id][i-1]['lat']);
-      var time = (carDB[car_id][i]['time']-carDB[car_id][i-1]['time'])/3600000;
-      carDB[car_id][i]['speed'] = (dist/time);
+      var dist = getDistance(carDB[car_id][i]['lon'], carDB[car_id][i]['lat'], carDB[car_id][i - 1]['lon'], carDB[car_id][i - 1]['lat']);
+      var time = (carDB[car_id][i]['time'] - carDB[car_id][i - 1]['time']) / 3600000;
+      carDB[car_id][i]['speed'] = (dist / time);
    }
 }
 
@@ -156,16 +156,17 @@ app.get('/register_vehicle', function (req, res) {
          // }
 
          // json response will be sent to the user
+         setInterval(() => {
+            Object.keys(carDB).forEach((car_id) => {
+               // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
+               new smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
+                  carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
+               })
+            })
+         }, 10000);
          res.redirect('/dashboard.html');
       });
 })
-
-setInterval( () => {Object.keys(carDB).forEach((car_id) => {
-      // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
-      smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
-            carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
-      })
-})}, 10000);
 
 var server = app.listen(3000, function () {
    var host = server.address().address;

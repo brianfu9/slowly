@@ -70,8 +70,9 @@ function getDistance(lon1, lat1, lon2, lat2) {
    var dlambda = Math.abs(lambda2 - lambda1)
 
    var rad = 6371; //km
-   var num = Math.sqrt(Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
+   var num = Math.sqrt(Math.cos(phi2) * Math.cos(phi2) * Math.sin(dlambda) * Math.sin(dlambda) + Math.pow(Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(dlambda) * Math.cos(dlambda), 2));
    var denom = Math.sin(phi1) * Math.sin(phi2) + Math.cos(phi1) * Math.cos(phi2) * Math.cos(dlambda);
+   console.log(num + " " + denom);
    var dsigma = Math.atan2(num, denom);
    return rad * dsigma;
 }
@@ -88,7 +89,7 @@ function findIsSpeeding(car_id, ind) {
    //each degree lon/lat ~ 111 km (69 mi)
    //bounding box:
    var w = 10;
-   var offset = 0.00002;
+   var offset = 0.0002;
    var minLon = carDB[car_id][ind]['lon'] - offset;
    var minLat = carDB[car_id][ind]['lat'] - offset;
    var maxLon = carDB[car_id][ind]['lon'] + offset;
@@ -158,9 +159,10 @@ app.get('/register_vehicle', function (req, res) {
                   let carlat = car["data"]["latitude"];
                   let carlon = car["data"]["longitude"];
                   let carspeed = 0;
-                  if (carDB[car_id].length >= 1) {
+                  if (len >= 1) {
                      let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
                      let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
+                     console.log("distance " + dist + " time " + time);
                      carspeed = (dist/time);
                   }
                   //let isspeeding = carspeed > speedLimit(carlon, carlat);
@@ -169,6 +171,7 @@ app.get('/register_vehicle', function (req, res) {
                   lon: carlon,
                   speed: carspeed,
                   speeding: false});
+                  console.log("updating " + carDB[car_id].length + " speed: " + carspeed);
                   findIsSpeeding(car_id, carDB[car_id].length-1);
                   //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
                   //points stufffffff

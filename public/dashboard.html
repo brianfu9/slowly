@@ -109,7 +109,8 @@
                                                     <div class="curved-inner-pro">
                                                         <div class="curved-ctn">
                                                             <h2>Sales Statistics</h2>
-                                                            <p>Vestibulum purus quam scelerisque, mollis nonummy metus</p>
+                                                            <p>Vestibulum purus quam scelerisque, mollis nonummy metus
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
@@ -123,68 +124,72 @@
                         </div>
                         <div id="menu12" class="tab-pane fade">
                             <div class="tab-ctn">
-                                    <div class="data-table-area">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="data-table-list">
-                                                            <div class="basic-tb-hd">
-                                                                <h2>Basic Example</h2>
-                                                                <p>It's just that simple. Turn your simple table into a sophisticated data table and offer
-                                                                    your users a nice experience and great features without any effort.</p>
-                                                            </div>
-                                                            <div class="table-responsive">
-                                                                <table id="data-table-basic" class="table table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>Lat</th>
-                                                                            <th>Lon</th>
-                                                                            <th>Time</th>
-                                                                            <th>Speed</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="vehicle-speed-db">
-                                                                    </tbody>
-                                                                    <script>
-                                                                        $.get('/getDB', (carDB) => {
-                                                                            var carsDB = JSON.parse(carDB);
-                                                                            $.get('/car_info', (car_info) => {
-                                                                                var html_string = "";
-                                                                                var car_id = car_info['id'];
-                                                                                var car_array = carsDB[car_id];
-                                                                                car_array.forEach((row_obj) => {
-                                                                                    html_string += `<tr>
+                                <div class="data-table-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="data-table-list">
+                                                    <div class="basic-tb-hd">
+                                                        <h2>Basic Example</h2>
+                                                        <p>It's just that simple. Turn your simple table into a
+                                                            sophisticated data table and offer
+                                                            your users a nice experience and great features without any
+                                                            effort.</p>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table id="data-table-basic" class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Lat</th>
+                                                                    <th>Lon</th>
+                                                                    <th>Time</th>
+                                                                    <th>Speed (km/h)</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="vehicle-speed-db">
+                                                            </tbody>
+                                                            <script>
+                                                                function numberWithCommas(x) {
+                                                                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                }
+                                                                $.get('/getDB', (carDB) => {
+                                                                    var carsDB = JSON.parse(carDB);
+                                                                    $.get('/car_info', (car_info) => {
+                                                                        var html_string = "";
+                                                                        var car_id = car_info['id'];
+                                                                        var car_array = carsDB[car_id];
+                                                                        car_array.forEach((row_obj) => {
+                                                                            html_string += `<tr>
                                                                                         <td>${car_info['year']} ${car_info['make']} ${car_info['model']}</td>
-                                                                                        <td>${row_obj['lat']}</td>
-                                                                                        <td>${row_obj['lon']}</td>
-                                                                                        <td>${row_obj['time']}</td>
-                                                                                        <td>speedy quik</td>
+                                                                                        <td>${Math.round(row_obj['lat']*1000000)/1000000}</td>
+                                                                                        <td>${Math.round(row_obj['lon']*1000000)/1000000}</td>
+                                                                                        <td>${new Date(row_obj['time']).toDateString()}, ${new Date(row_obj['time']).toLocaleTimeString()}</td>
+                                                                                        <td>${numberWithCommas(Math.round(row_obj['speed'] * 100) / 100)}</td>
                                                                                     </tr>`
-                                                                                });
-                                                                                $('#vehicle-speed-db').html(html_string);
-                                                                            });
                                                                         });
-                                                                    </script>
-                                                                    <tfoot>
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>Lat</th>
-                                                                            <th>Lon</th>
-                                                                            <th>Time</th>
-                                                                            <th>Speed</th>
-                                                                        </tr>
-                                                                    </tfoot>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                                        $('#vehicle-speed-db').html(html_string);
+                                                                    });
+                                                                });
+                                                            </script>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Lat</th>
+                                                                    <th>Lon</th>
+                                                                    <th>Time</th>
+                                                                    <th>Speed (km/h)</th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

@@ -82,29 +82,116 @@
         </div>
     </div>
     <!-- End Header Top Area -->
-   
-    
-    
-    <!-- Start Sale Statistic area-->
-    <div class="sale-statistic-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
-                    <div class="sale-statistic-inner notika-shadow mg-tb-30">
-                        <div class="curved-inner-pro">
-                            <div class="curved-ctn">
-                                <h2>Sales Statistics</h2>
-                                <p>Vestibulum purus quam scelerisque, mollis nonummy metus</p>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="widget-tabs-int tab-ctm-wp mg-t-30">
+                <div class="tab-hd">
+                    <h2>Dashboard</h2>
+                    <p>View your driving stats here.</p>
+                </div>
+                <div class="widget-tabs-list">
+                    <ul class="nav nav-tabs tab-nav-right">
+                        <li class="active"><a data-toggle="tab" href="#home2">Speed Trend</a></li>
+                        <li><a data-toggle="tab" href="#menu12">Statisitcs</a></li>
+                    </ul>
+                    <div class="tab-content tab-custom-st tab-ctn-right">
+                        <div id="home2" class="tab-pane fade in active">
+                            <div class="tab-ctn">
+                                <!-- Start Sale Statistic area-->
+                                <div class="sale-statistic-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                                                <div class="sale-statistic-inner notika-shadow mg-tb-30">
+                                                    <div class="curved-inner-pro">
+                                                        <div class="curved-ctn">
+                                                            <h2>Sales Statistics</h2>
+                                                            <p>Vestibulum purus quam scelerisque, mollis nonummy metus</p>
+                                                        </div>
+                                                    </div>
+                                                    <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Sale Statistic area-->
                             </div>
                         </div>
-                        <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
+                        <div id="menu12" class="tab-pane fade">
+                            <div class="tab-ctn">
+                                    <div class="data-table-area">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="data-table-list">
+                                                            <div class="basic-tb-hd">
+                                                                <h2>Basic Example</h2>
+                                                                <p>It's just that simple. Turn your simple table into a sophisticated data table and offer
+                                                                    your users a nice experience and great features without any effort.</p>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                <table id="data-table-basic" class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>Lat</th>
+                                                                            <th>Lon</th>
+                                                                            <th>Time</th>
+                                                                            <th>Speed</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="vehicle-speed-db">
+                                                                    </tbody>
+                                                                    <script>
+                                                                        $.get('/getDB', (carDB) => {
+                                                                            var carsDB = JSON.parse(carDB);
+                                                                            console.log(JSON.stringify(carsDB));
+                                                                            $.get('/car_info', (car_info) => {
+                                                                                var html_string = "";
+                                                                                var car_id = car_info['id'];
+                                                                                var car_array = carsDB[car_id];
+                                                                                car_array.forEach((row_obj) => {
+                                                                                    html_string += `<tr>
+                                                                                        <td>${car_info['year']} ${car_info['make']} ${car_info['model']}</td>
+                                                                                        <td>${row_obj['lat']}</td>
+                                                                                        <td>${row_obj['lon']}</td>
+                                                                                        <td>${row_obj['time']}</td>
+                                                                                        <td>speedy quik</td>
+                                                                                    </tr>`
+                                                                                });
+                                                                                $('#vehicle-speed-db').html(html_string);
+                                                                            });
+                                                                        });
+                                                                    </script>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>Lat</th>
+                                                                            <th>Lon</th>
+                                                                            <th>Time</th>
+                                                                            <th>Speed</th>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Sale Statistic area-->
-  
+
+
+
     <!-- jquery
 		============================================ -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -164,7 +251,7 @@
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-	<!--  Chat JS
+    <!--  Chat JS
 		============================================ -->
     <script src="js/chat/moment.min.js"></script>
     <script src="js/chat/jquery.chat.js"></script>

@@ -144,12 +144,15 @@
                                                                     <th>Lat</th>
                                                                     <th>Lon</th>
                                                                     <th>Time</th>
-                                                                    <th>Speed</th>
+                                                                    <th>Speed (km/h)</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="vehicle-speed-db">
                                                             </tbody>
                                                             <script>
+                                                                function numberWithCommas(x) {
+                                                                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                }
                                                                 $.get('/getDB', (carDB) => {
                                                                     var carsDB = JSON.parse(carDB);
                                                                     $.get('/car_info', (car_info) => {
@@ -159,10 +162,10 @@
                                                                         car_array.forEach((row_obj) => {
                                                                             html_string += `<tr>
                                                                                         <td>${car_info['year']} ${car_info['make']} ${car_info['model']}</td>
-                                                                                        <td>${row_obj['lat']}</td>
-                                                                                        <td>${row_obj['lon']}</td>
-                                                                                        <td>${row_obj['time'].toDateString()}</td>
-                                                                                        <td>${row_obj['speed']}</td>
+                                                                                        <td>${Math.round(row_obj['lat']*1000000)/1000000}</td>
+                                                                                        <td>${Math.round(row_obj['lon']*1000000)/1000000}</td>
+                                                                                        <td>${new Date(row_obj['time']).toDateString()}, ${new Date(row_obj['time']).toLocaleTimeString()}</td>
+                                                                                        <td>${numberWithCommas(Math.round(row_obj['speed'] * 100) / 100)}</td>
                                                                                     </tr>`
                                                                         });
                                                                         $('#vehicle-speed-db').html(html_string);
@@ -175,7 +178,7 @@
                                                                     <th>Lat</th>
                                                                     <th>Lon</th>
                                                                     <th>Time</th>
-                                                                    <th>Speed</th>
+                                                                    <th>Speed (km/h)</th>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>

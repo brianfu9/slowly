@@ -90,10 +90,22 @@
  /*----------------------------
  jQuery curvedLines
 ------------------------------ */
-    var CarData = [2,4,6,8,10,13,14,15,16,20,22,30,31,32,33,2];
-    for (var d1 = [], i = 0; 10 >= i; i += 1) d1.push([i, parseInt(30 * 2)]);
-    for (var d2 = [], i = 0; 20 >= i; i += 1) d2.push([i, parseInt(30 * 4)]);
-    for (var d3 = [], i = 0; CarData.length >= i; i += 1) d3.push([i, parseInt(30 * CarData[i])]);
+    
+    $.get('/getDB', function(data){
+        var k = 0;
+        var carDB = data
+        var CarData = [];
+    var max_length = 20
+    while(k<max_length && carDB.length != k){
+        if (carDB[k]["speed"]){
+            CarData.push(carDB[k]["speed"]);
+        } else{
+            max_length += 1;
+        };
+        k += 1;
+        
+    }
+    for (var d3 = [], i = 0; CarData.length >= i; i += 1) d3.push([i, parseInt( CarData[i])]);
     var d4 = [[2011, 10], [2012, 20],[2013, 30],[2014, 40]]
     var options = {
         series: {
@@ -129,7 +141,7 @@
         }
     };
     $("#curved-line-chart")[0] && $.plot($("#curved-line-chart"), [{
-        data: d4,
+        data: d3,
         lines: {
             show: !0,
             fill: .98
@@ -147,6 +159,8 @@
             }).show()
         } else $(".flot-tooltip").hide()
     }), $("<div class='flot-tooltip' class='chart-tooltip'></div>").appendTo("body"));
+    }); 
+    
 
 	
 	

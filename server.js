@@ -171,7 +171,7 @@ app.get('/register_vehicle', function (req, res) {
                   //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
                })
             })
-         }, 1000);
+         }, 10000);
          res.redirect('/dashboard.html');
       });
 })

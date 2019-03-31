@@ -176,13 +176,6 @@ app.get('/register_vehicle', function (req, res) {
       });
 })
 
-// setInterval( () => {Object.keys(carDB).forEach((car_id) => {
-//       // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
-//       smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
-         
-//       })
-// })}, 10000);
-
 var server = app.listen(3000, function () {
    var host = server.address().address;
    var port = server.address().port;

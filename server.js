@@ -102,8 +102,8 @@ function findIsSpeeding(car_id, ind) {
          let spdLimit = way['tags']['maxspeed'];
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
-         if (ind > 0) {
-            carDB[car_id][ind]['speeding'] = carDB[car_id][ind]['speed'] > i;
+         if (ind > 0 && carDB[car_id][ind]['speed'] > 1) {
+            carDB[car_id][ind]['speeding'] = true;
          }
       },
    });
@@ -166,12 +166,13 @@ app.get('/register_vehicle', function (req, res) {
                   carDB[car_id].push({ time: cartime, 
                   lat: carlat, 
                   lon: carlon,
-                  speed: carspeed,});
+                  speed: carspeed,
+                  speeding: false});
                   findIsSpeeding(car_id, carDB[car_id].length-1);
                   //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
                })
             })
-         }, 1000);
+         }, 10000);
          res.redirect('/dashboard.html');
       });
 })

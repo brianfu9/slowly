@@ -85,7 +85,7 @@
     </div>
     <!-- End Header Top Area -->
 
-    <div class="row" style="margin-left:10%; margin-right:10%">
+    <div class="row" style="margin-left:5%; margin-right:5%">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="widget-tabs-int tab-ctm-wp mg-t-30">
                 <div class="col-lg-12">
@@ -115,26 +115,67 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card" style="margin-top:40px;">
-                                                <div class="card-body">
-                                                    <h2 class="card-title">Points:</h2>
-                                                    <h3 class="card-title" id="points"></h3>
-                                                    <script>
-                                                        $.get('/getPoints', (points) => {
-                                                            var pts = JSON.parse(points);
-                                                            $.get('/car_info', (car_info) => {
-                                                                htmlstr = "";
-                                                                var car_id = car_info['id'];
-                                                                if (car_id in pts) {
-                                                                    htmlstr = `${pts[car_id]}`;
-                                                                    console.log("pts: " + pts[car_id]);
-                                                                } else {
-                                                                    htmlstr = '0';
-                                                                }
-                                                                $('#points').html(htmlstr);
-                                                            });
-                                                        });
-                                                    </script>
+                                            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12" style="margin-top:5%">
+                                                <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
+                                                    <div class="dash-widget-visits"></div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3 id="points"></h3>
+                                                            <p>Safe Driver Rating</p>
+                                                            <script>
+                                                                $.get('/getPoints', (points) => {
+                                                                    var pts = JSON.parse(points);
+                                                                    $.get('/car_info', (car_info) => {
+                                                                        htmlstr = "";
+                                                                        var car_id = car_info['id'];
+                                                                        if (car_id in pts) {
+                                                                            htmlstr = `${pts[car_id]}`;
+                                                                            console.log("pts: " + pts[car_id]);
+                                                                        } else {
+                                                                            htmlstr = '0';
+                                                                        }
+                                                                        $('#points').html(htmlstr);
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-bar"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3 id="num_points"></h3>
+                                                            <p>Datapoints Recieved</p>
+                                                            <script>
+                                                                    $.get('/getDB', (DB) => {
+                                                                        var carDB = JSON.parse(DB);
+                                                                        $.get('/car_info', (car_info) => {
+                                                                            htmlstr = "";
+                                                                            var car_id = car_info['id'];
+                                                                            if (car_id in carDB) {
+                                                                                htmlstr = `${carDB[car_id].length}`;
+                                                                            } else {
+                                                                                htmlstr = '0';
+                                                                            }
+                                                                            $('#num_points').html(htmlstr);
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-line"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3><span class="counter">420</span></h3>
+                                                            <p>Daily Lucky Number</p>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-bar-2"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,11 +193,6 @@
                                                 <div class="data-table-list">
                                                     <div class="basic-tb-hd">
                                                         <h2>Basic Example</h2>
-                                                        <p>It's just that simple. Turn your simple table into a
-                                                            sophisticated data table and offer
-                                                            your users a nice experience and great features without
-                                                            any
-                                                            effort.</p>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table id="data-table-basic" class="table table-striped">

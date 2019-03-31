@@ -103,7 +103,7 @@ function findIsSpeeding(car_id, ind) {
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
          if (ind > 0) {
-            carDB[car_id][ind]['speeding'] = "8=D"//carDB[car_id][ind]['speed'] > i;
+            carDB[car_id][ind]['speeding'] = carDB[car_id][ind]['speed'] > i;
          }
       },
    });

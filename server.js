@@ -176,9 +176,9 @@ app.get('/register_vehicle', function (req, res) {
                      points[car_id] = 0;
                   }
                   if (carDB[car_id][carDB[car_id].length-1]['speeding']) {
-                     points[car_id] = points[car_id] - 5;
+                     points[car_id] = points[car_id] - 50;
                   } else {
-                     points[car_id] = points[car_id] + 1;
+                     points[car_id] = points[car_id] + 10;
                   }
                   console.log("points: " + points[car_id]);
                })

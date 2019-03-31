@@ -66,7 +66,7 @@
 			},
 			label: "Product 2",
 			stack: !0,
-			color: "#00c292"
+			color: "#f60"
 		}], options), $("#recent-items-chart")[0] && $.plot($("#recent-items-chart"), [{
 			data: getRandomData(),
 			lines: {
@@ -75,7 +75,7 @@
 			},
 			label: "Items",
 			stack: !0,
-			color: "#00c292"
+			color: "#f60"
 		}], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function(event, pos, item) {
 			if (item) {
 				var x = item.datapoint[0].toFixed(2),
@@ -136,7 +136,7 @@
         },
         label: "Product 2",
         stack: !0,
-        color: "#00c292"
+        color: "#f60"
     }], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function(event, pos, item) {
         if (item) {
             var x = item.datapoint[0].toFixed(2),
@@ -199,7 +199,7 @@
 				size: size
 			})
 		}
-		$(".stats-bar")[0] && sparklineBar("stats-bar", [6, 4, 8, 6, 5, 6, 7, 8, 3, 5, 9, 5, 8, 4], "35px", 3, "#00c292", 2), $(".stats-bar-2")[0] && sparklineBar("stats-bar-2", [4, 7, 6, 2, 5, 3, 8, 6, 6, 4, 8, 6, 5, 8], "35px", 3, "#01c0c8", 2), $(".stats-line")[0] && sparklineLine("stats-line", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], 68, 35, "#fb9678", "#fb9678", 1.25, "#fb9678", "#fb9678", "#fb9678", 3, "#fb9678", "#fb9678"), $(".stats-line-2")[0] && sparklineLine("stats-line-2", [5, 6, 3, 9, 7, 5, 4, 6, 5, 6, 4, 9], 68, 35, "#00c292", "#00c292", 1.25, "#00c292", "#00c292", "#00c292", 3, "#00c292", "#00c292"), $(".stats-pie")[0] && sparklinePie("stats-pie", [20, 35, 30, 5], 45, 45, ["#fff", "rgba(255,255,255,0.7)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]), $(".dash-widget-visits")[0] && sparklineLine("dash-widget-visits", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], "100%", "70px", "#00c292", "#00c292", 2, "#00c292", "#00c292", "#00c292", 5, "#00c292", "#00c292"), $(".main-pie")[0] && easyPieChart("main-pie", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 148), $(".sub-pie-1")[0] && easyPieChart("sub-pie-1", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90), $(".sub-pie-2")[0] && easyPieChart("sub-pie-2", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90)
+		$(".stats-bar")[0] && sparklineBar("stats-bar", [6, 4, 8, 6, 5, 6, 7, 8, 3, 5, 9, 5, 8, 4], "35px", 3, "#f60", 2), $(".stats-bar-2")[0] && sparklineBar("stats-bar-2", [4, 7, 6, 2, 5, 3, 8, 6, 6, 4, 8, 6, 5, 8], "35px", 3, "#01c0c8", 2), $(".stats-line")[0] && sparklineLine("stats-line", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], 68, 35, "#fb9678", "#fb9678", 1.25, "#fb9678", "#fb9678", "#fb9678", 3, "#fb9678", "#fb9678"), $(".stats-line-2")[0] && sparklineLine("stats-line-2", [5, 6, 3, 9, 7, 5, 4, 6, 5, 6, 4, 9], 68, 35, "#f60", "#f60", 1.25, "#f60", "#f60", "#f60", 3, "#f60", "#f60"), $(".stats-pie")[0] && sparklinePie("stats-pie", [20, 35, 30, 5], 45, 45, ["#fff", "rgba(255,255,255,0.7)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]), $(".dash-widget-visits")[0] && sparklineLine("dash-widget-visits", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], "100%", "70px", "#f60", "#f60", 2, "#f60", "#f60", "#f60", 5, "#f60", "#f60"), $(".main-pie")[0] && easyPieChart("main-pie", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 148), $(".sub-pie-1")[0] && easyPieChart("sub-pie-1", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90), $(".sub-pie-2")[0] && easyPieChart("sub-pie-2", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90)
 	
 
 	
@@ -236,7 +236,7 @@
         barData = [{
             label: "Product",
             data: data1,
-            color: "#00c292"
+            color: "#f60"
         }, {
             label: "Product",
             data: data2,
@@ -268,7 +268,7 @@
             font: {
                 lineHeight: 14,
                 style: "normal",
-                color: "#00c292"
+                color: "#f60"
             },
             shadowSize: 0
         },
@@ -278,7 +278,7 @@
             font: {
                 lineHeight: 14,
                 style: "normal",
-                color: "#00c292"
+                color: "#f60"
             },
             shadowSize: 0
         },
@@ -331,7 +331,7 @@
                     lineWidth: .2,
                     fill: .99
                 },
-                color: "#00c292",
+                color: "#f60",
                 shadowSize: 0
             },
             yaxis: {
@@ -341,7 +341,7 @@
                 font: {
                     lineHeight: 14,
                     style: "normal",
-                    color: "#00c292"
+                    color: "#f60"
                 },
                 shadowSize: 0
             },
@@ -351,7 +351,7 @@
                 font: {
                     lineHeight: 14,
                     style: "normal",
-                    color: "#00c292"
+                    color: "#f60"
                 },
                 shadowSize: 0,
                 min: 0,

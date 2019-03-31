@@ -9,7 +9,7 @@
             type: 'bar',
             height: 36,
             barWidth: 3,
-            barColor: '#00c292',
+            barColor: '#f60',
             barSpacing: 2
         });
     }

@@ -23,6 +23,7 @@ const client = new smartcar.AuthClient({
 });
 
 var carDB = {}
+var points = {}
 
 app.use(express.static('public'));
 
@@ -170,6 +171,16 @@ app.get('/register_vehicle', function (req, res) {
                   speeding: false});
                   findIsSpeeding(car_id, carDB[car_id].length-1);
                   //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
+                  //points stufffffff
+                  if (!(car_id in points)) {
+                     points[car_id] = 0;
+                  }
+                  if (carDB[car_id][carDB[car_id].length-1]['speeding']) {
+                     points[car_id] = points[car_id] - 5;
+                  } else {
+                     points[car_id] = points[car_id] + 1;
+                  }
+                  console.log("points: " + points[car_id]);
                })
             })
          }, 10000);

@@ -149,7 +149,6 @@
                                                                     <script>
                                                                         $.get('/getDB', (carDB) => {
                                                                             var carsDB = JSON.parse(carDB);
-                                                                            console.log(JSON.stringify(carsDB));
                                                                             $.get('/car_info', (car_info) => {
                                                                                 var html_string = "";
                                                                                 var car_id = car_info['id'];

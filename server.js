@@ -75,15 +75,6 @@ function getDistance(lon1, lat1, lon2, lat2) {
    return rad * dsigma;
 }
 
-function getSpeeds(car_id) {
-   if (carDB.length < 2) return;
-   for (var i = 1; i < carDB[car_id].length; i++) {
-      var dist = getDistance(carDB[car_id][i]['lon'], carDB[car_id][i]['lat'], carDB[car_id][i - 1]['lon'], carDB[car_id][i - 1]['lat']);
-      var time = (carDB[car_id][i]['time'] - carDB[car_id][i - 1]['time']) / 3600000;
-      carDB[car_id][i]['speed'] = (dist / time);
-   }
-}
-
 app.get('/odometer', function (req, res) {
    // {"data":{"distance":17666.08984375},"age":"2019-03-30T22:31:57.195Z","unitSystem":"metric"}
    new smartcar.Vehicle(req.session.vehicle, req.session.token).odometer().then(function (response) {
@@ -91,31 +82,6 @@ app.get('/odometer', function (req, res) {
       res.json(response);
    });
 })
-
-// function speedLimit(lon, lat) {
-//    //each degree lon/lat ~ 111 km (69 mi)
-//    //bounding box:
-//    var w = 10;
-//    var offset = 0.00002;
-//    var minLon = lon - offset;
-//    var minLat = lat - offset;
-//    var maxLon = lon + offset;
-//    var maxLat = lat + offset;
-
-//    var requri = `http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=${minLon},${minLat},${maxLon},${maxLat}]`;
-//    console.log(requri);
-//    osmread.parse({
-//       url: requri,
-//       format: 'xml',
-//       way: function (way) {
-//          console.log('maxspeed: ' + way['tags']['maxspeed']);
-//          let spdLimit = way['tags']['maxspeed']
-//          console.log("hello"  + spdLimit);
-//          let i = parseInt(spdLimit.slice(0, -4));
-//          console.log("i = " + i);
-//       },
-//    });
-// }
 
 function findIsSpeeding(car_id, ind) {
    //each degree lon/lat ~ 111 km (69 mi)
@@ -136,7 +102,9 @@ function findIsSpeeding(car_id, ind) {
          let spdLimit = way['tags']['maxspeed'];
          console.log('maxspeed: ' + spdLimit);
          let i = parseInt(spdLimit.slice(0, -4));
-         
+         if (ind > 0) {
+            carDB[car_id][ind]['speeding'] = "8=D"//carDB[car_id][ind]['speed'] > i;
+         }
       },
    });
 }
@@ -184,35 +152,36 @@ app.get('/register_vehicle', function (req, res) {
             Object.keys(carDB).forEach((car_id) => {
                // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
                new smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
-                  carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
+                  let len = carDB[car_id].length;
+                  let cartime = new Date(car["age"]);
+                  let carlat = car["data"]["latitude"];
+                  let carlon = car["data"]["longitude"];
+                  let carspeed = 0;
+                  if (carDB[car_id].length >= 1) {
+                     let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
+                     let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
+                     carspeed = (dist/time);
+                  }
+                  //let isspeeding = carspeed > speedLimit(carlon, carlat);
+                  carDB[car_id].push({ time: cartime, 
+                  lat: carlat, 
+                  lon: carlon,
+                  speed: carspeed,});
+                  findIsSpeeding(car_id, carDB[car_id].length-1);
+                  //carDB[car_id].push({ time: new Date(car["age"]), lat: car["data"]["latitude"], lon: car["data"]["longitude"] });
                })
             })
-         }, 10000);
+         }, 1000);
          res.redirect('/dashboard.html');
       });
 })
 
-setInterval( () => {Object.keys(carDB).forEach((car_id) => {
-      // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
-      smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
-         let len = carDB[car_id].length;
-         let cartime = new Date(car["age"]);
-         let carlat = car["data"]["latitude"];
-         let carlon = car["data"]["longitude"];
-         let carspeed = 0;
-         if (carDB[car_id].length >= 1) {
-            let dist = getDistance(carlon, carlat, carDB[car_id][len-1]['lon'], carDB[car_id][len-1]['lat']);
-            let time = (cartime-carDB[car_id][len-1]['time'])/3600000;
-            carspeed = (dist/time);
-         }
-         //let isspeeding = carspeed > speedLimit(carlon, carlat);
-         carDB[car_id].push({ time: cartime, 
-         lat: carlat, 
-         lon: carlon,
-         speed: carspeed,});
-         findIsSpeeding(car_id, carDB[car_id].length-1);
-      })
-})}, 10000);
+// setInterval( () => {Object.keys(carDB).forEach((car_id) => {
+//       // {"data":{"latitude":37.35966873168945,"longitude":-107.14901733398438},"age":"2019-03-30T22:31:39.025Z"}
+//       smartcar.Vehicle(car_id, req.session.token).location().then((car) => {
+         
+//       })
+// })}, 10000);
 
 var server = app.listen(3000, function () {
    var host = server.address().address;

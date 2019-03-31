@@ -98,7 +98,7 @@
             var car_array = carsDB[car_id];
             var k = 0;
             var CarData = [];
-            var max_length = 20;
+            var max_length = 21;
             while (k < max_length && car_array.length != k) {
                 if (car_array[k]["speed"]) {
                     CarData.push(car_array[k]["speed"]);
@@ -107,7 +107,7 @@
                 };
                 k += 1;
             }
-            console.log(k);
+            
             for (var d3 = [], i = 0; CarData.length >= i; i += 1) d3.push([i, CarData[i]]);
             var options = {
                 series: {
@@ -118,9 +118,9 @@
                         monotonicFit: !0
                     },
                     lines: {
-                        show: !1,
-                        lineWidth: 0,
-                        fill: 1
+                        show: 1,
+                        lineWidth: 1,
+                        fill: 0
                     }
                 },
                 grid: {
@@ -132,11 +132,11 @@
                 },
                 xaxis: {
                     tickDecimals: 0,
-                    ticks: !1
+                    ticks: 20
                 },
                 yaxis: {
                     tickDecimals: 0,
-                    ticks: !1
+                    ticks: 10
                 },
                 legend: {
                     show: !1
@@ -148,14 +148,14 @@
                     show: !0,
                     fill: .98
                 },
-                label: "Product 2",
+                label: "Speed",
                 stack: !0,
                 color: "#f60"
             }], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function (event, pos, item) {
                 if (item) {
                     var x = item.datapoint[0].toFixed(2),
                         y = item.datapoint[1].toFixed(2);
-                    $(".flot-tooltip").html(item.series.label + " of " + x + " = " + y).css({
+                    $(".flot-tooltip").html(item.series.label + " at point " + x + " = " + y).css({
                         top: item.pageY + 5,
                         left: item.pageX + 5
                     }).show()

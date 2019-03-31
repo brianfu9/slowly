@@ -526,6 +526,9 @@ ul.notika-menu-wrap li a{
 /*----------------------------------------*/
 /*  5.  statistics CSS
 /*----------------------------------------*/
+.centeralign {
+    text-align: left;
+}
 .flot-chart {
     height: 319px;
 }

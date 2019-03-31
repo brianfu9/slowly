@@ -71,7 +71,11 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
+<<<<<<< HEAD
                         <a href="/"><img src="images/logo.png" style="vertical-align: -webkit-baseline-middle" alt="" /></a>
+=======
+                        <a href="/"><img src="img/logo/logo.png" alt="" /></a>
+>>>>>>> 1e7e8a19c3700c01767386233f04803b054c4a46
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -85,7 +89,7 @@
     </div>
     <!-- End Header Top Area -->
 
-    <div class="row" style="margin-left:10%; margin-right:10%">
+    <div class="row" style="margin-left:5%; margin-right:5%">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="widget-tabs-int tab-ctm-wp mg-t-30">
                 <div class="col-lg-12">
@@ -96,6 +100,7 @@
                     <ul class="nav nav-tabs tab-nav-right">
                         <li class="active"><a data-toggle="tab" href="#home2">Speed Trend</a></li>
                         <li><a data-toggle="tab" href="#menu12">Statisitcs</a></li>
+                        <li><a data-toggle="tab" href="#mappp">Map</a></li>
                     </ul>
                     <div class="tab-content tab-custom-st tab-ctn-right">
                         <div id="home2" class="tab-pane fade in active">
@@ -108,33 +113,74 @@
                                                 <div class="sale-statistic-inner notika-shadow mg-tb-30">
                                                     <div class="curved-inner-pro">
                                                         <div class="curved-ctn">
-                                                            <h2>Speed History</h2>
+                                                            <h2>Speed History (km/h)</h2>
                                                         </div>
                                                     </div>
                                                     <div id="curved-line-chart" class="flot-chart-sts flot-chart">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card" style="margin-top:40px;">
-                                                <div class="card-body">
-                                                    <h2 class="card-title">Points:</h2>
-                                                    <h3 class="card-title" id="points"></h3>
-                                                    <script>
-                                                        $.get('/getPoints', (points) => {
-                                                            var pts = JSON.parse(points);
-                                                            $.get('/car_info', (car_info) => {
-                                                                htmlstr = "";
-                                                                var car_id = car_info['id'];
-                                                                if (car_id in pts) {
-                                                                    htmlstr = `${pts[car_id]}`;
-                                                                    console.log("pts: " + pts[car_id]);
-                                                                } else {
-                                                                    htmlstr = '0';
-                                                                }
-                                                                $('#points').html(htmlstr);
-                                                            });
-                                                        });
-                                                    </script>
+                                            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12" style="margin-top:5%">
+                                                <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
+                                                    <div class="dash-widget-visits"></div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3 id="points"></h3>
+                                                            <p>Safe Driver Rating</p>
+                                                            <script>
+                                                                $.get('/getPoints', (points) => {
+                                                                    var pts = JSON.parse(points);
+                                                                    $.get('/car_info', (car_info) => {
+                                                                        htmlstr = "";
+                                                                        var car_id = car_info['id'];
+                                                                        if (car_id in pts) {
+                                                                            htmlstr = `${pts[car_id]}`;
+                                                                            console.log("pts: " + pts[car_id]);
+                                                                        } else {
+                                                                            htmlstr = '0';
+                                                                        }
+                                                                        $('#points').html(htmlstr);
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-bar"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3 id="num_points"></h3>
+                                                            <p>Datapoints Recieved</p>
+                                                            <script>
+                                                                $.get('/getDB', (DB) => {
+                                                                    var carDB = JSON.parse(DB);
+                                                                    $.get('/car_info', (car_info) => {
+                                                                        htmlstr = "";
+                                                                        var car_id = car_info['id'];
+                                                                        if (car_id in carDB) {
+                                                                            htmlstr = `${carDB[car_id].length}`;
+                                                                        } else {
+                                                                            htmlstr = '0';
+                                                                        }
+                                                                        $('#num_points').html(htmlstr);
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-line"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="past-statistic-an">
+                                                        <div class="past-statistic-ctn">
+                                                            <h3><span class="counter">420</span></h3>
+                                                            <p>Daily Lucky Number</p>
+                                                        </div>
+                                                        <div class="past-statistic-graph">
+                                                            <div class="stats-bar-2"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,11 +198,6 @@
                                                 <div class="data-table-list">
                                                     <div class="basic-tb-hd">
                                                         <h2>Basic Example</h2>
-                                                        <p>It's just that simple. Turn your simple table into a
-                                                            sophisticated data table and offer
-                                                            your users a nice experience and great features without
-                                                            any
-                                                            effort.</p>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table id="data-table-basic" class="table table-striped">
@@ -212,12 +253,71 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="mappp" class="tab-pane fade">
+                            <div class="tab-ctn">
+                                <div class="data-table-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="data-table-list">
+                                                    <div class="basic-tb-hd">
+                                                        <h2>Map</h2>
+                                                        <div class="google-map-area">
+                                                            <div class="container">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                    <div class="google-map-single">
+                                                                        <div id="map2"></div>
+                                                                        <script>
+
+                                                                          // This example creates a 2-pixel-wide red polyline showing the path of
+                                                                          // the first trans-Pacific flight between Oakland, CA, and Brisbane,
+                                                                          // Australia which was made by Charles Kingsford Smith.
+                                                                    
+                                                                          function initMap() {
+                                                                            var map = new google.maps.Map(document.getElementById('map2'), {
+                                                                              zoom: 1,
+                                                                              center: {lat: 0, lng: -180},
+                                                                              mapTypeId: 'terrain'
+                                                                            });
+                                                                            var coords = [];
+                                                                            $.get('/getDB', (carDB) => {
+                                                                              var carsDB = JSON.parse(carDB);
+                                                                              $.get('/car_info', (car_info) => {
+                                                                                var car_id = car_info['id'];
+                                                                                var car_array = carsDB[car_id];
+                                                                                car_array.forEach((row_obj) => {
+                                                                                  coords.push({lat: row_obj['lat'], lng: row_obj['lon']});
+                                                                                });
+                                                                                var Path = new google.maps.Polyline({
+                                                                                  path: coords,
+                                                                                  geodesic: true,
+                                                                                  strokeColor: '#FF0000',
+                                                                                  strokeOpacity: 1.0,
+                                                                                  strokeWeight: 2
+                                                                                });
+                                                                      
+                                                                              Path.setMap(map);
+                                                                              });
+                                                                            });
+                                                                          }
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- jquery
 		============================================ -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -281,6 +381,10 @@
 		============================================ -->
     <script src="js/chat/moment.min.js"></script>
     <script src="js/chat/jquery.chat.js"></script>
+    <!-- Google map JS
+    ============================================ -->
+    <!-- <script src="js/google.maps/google.maps2-active.js"></script> -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEwVW9wo3nDz-pN5l0sl1nsr0_FDCnuiA&callback=initMap"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>

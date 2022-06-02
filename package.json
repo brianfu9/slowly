@@ -23,7 +23,7 @@
     "jquery": "^3.4.0",
     "jsdom": "^14.0.0",
     "osm-read-boolive": "^1.2.0",
-    "protobufjs": "^6.8.8",
+    "protobufjs": "^6.11.3",
     "request": "^2.88.0",
     "requests": "^0.2.2",
     "smartcar": "^4.4.0",
